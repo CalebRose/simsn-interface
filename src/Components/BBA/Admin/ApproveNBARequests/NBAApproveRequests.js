@@ -57,11 +57,12 @@ const NBAApproveRequests = ({ currentUser }) => {
                 NBATeamID: payload.NBATeamID,
                 NBATeam: payload.NBATeam,
                 NBATeamAbbreviation: payload.NBATeamAbbreviation,
-                NBARole: role
+                NBARole: role,
+                username: payload.Username
             };
 
             // Firebase Call
-            updateUserByUsername(payload.username, firebasePayload);
+            updateUserByUsername(payload.Username, firebasePayload);
             console.log('Firebase Updated');
 
             // Filter Requests

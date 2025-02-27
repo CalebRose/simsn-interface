@@ -56,10 +56,11 @@ const ApproveNFLRequests = ({ currentUser }) => {
                 NFLTeamID: payload.NFLTeamID,
                 NFLTeam: payload.NFLTeam,
                 NFLTeamAbbreviation: payload.NFLTeamAbbreviation,
-                NFLRole: role
+                NFLRole: role,
+                username: payload.Username
             };
 
-            updateUserByUsername(payload.username, fbPayload);
+            updateUserByUsername(payload.Username, fbPayload);
             console.log('Firebase Updated');
             // Filter Requests
             const filterRequests = requests.filter((x) => x.ID !== payload.ID);
