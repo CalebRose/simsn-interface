@@ -66,10 +66,10 @@ const CFBStatisticsPage = ({ currentUser, cfb_Timestamp, viewMode }) => {
     const [filteredView, setFilteredView] = useState([]);
     const [viewableStats, setViewableStats] = useState([]);
     const [count, setCount] = useState(100);
-    const [sort, setSort] = React.useState('PassingYards');
-    const [isAsc, setIsAsc] = React.useState(false);
+    const [sort, setSort] = useState('PassingYards');
+    const [isAsc, setIsAsc] = useState(false);
     const [viewWidth, setViewWidth] = useState(window.innerWidth);
-    React.useEffect(() => {
+    useEffect(() => {
         if (!viewWidth) {
             setViewWidth(window.innerWidth);
         }
@@ -288,6 +288,8 @@ const CFBStatisticsPage = ({ currentUser, cfb_Timestamp, viewMode }) => {
                 startingWeekID = isCFB ? 43 : 21;
             } else if (seasonID === 4) {
                 startingWeekID = isCFB ? 65 : 26;
+            } else if (seasonID === 5) {
+                startingWeekID = isCFB ? 88 : 52;
             }
         }
         week = week + startingWeekID;

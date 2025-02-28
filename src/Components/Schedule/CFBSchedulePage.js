@@ -200,8 +200,10 @@ const SchedulePage = ({ cfbTeam, cfb_Timestamp, viewMode, currentUser }) => {
             startingWeekID = 21;
         } else if (seasonID === 3) {
             startingWeekID = 43;
-        } else {
+        } else if (seasonID === 4) {
             startingWeekID = 65;
+        } else {
+            startingWeekID = 88;
         }
         week += startingWeekID;
 
@@ -439,9 +441,8 @@ const SchedulePage = ({ cfbTeam, cfb_Timestamp, viewMode, currentUser }) => {
                             <button
                                 type="button"
                                 className="btn btn-primary"
-                                disabled
-                                // disabled={!selectedWeek || !selectedSeason}
-                                // onClick={ExportResults}
+                                disabled={!selectedWeek || !selectedSeason}
+                                onClick={ExportResults}
                             >
                                 Export Week {selectedWeek} {exportType} Results
                             </button>

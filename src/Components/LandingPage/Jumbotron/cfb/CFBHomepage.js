@@ -100,11 +100,16 @@ const CFBHomepage = ({ currentUser, cfbTeam, cfb_Timestamp }) => {
         let prevIdx = games.findIndex((x) => x.Week === prevWeek);
         let nextIdx = games.findIndex((x) => x.Week === nextWeek);
 
-        if (prevIdx === -1 || nextIdx === -1) {
+        if (prevIdx === -1 && nextIdx === -1) {
             setViewableMatches([]);
-        } else {
-            setViewableMatches(games.slice(prevIdx, nextIdx + 1));
+            return;
         }
+        if (prevIdx === -1 && nextIdx > -1) {
+            prevIdx = 0;
+        } else if (prevIdx > -1 && nextIdx === -1) {
+            nextIdx = games.findIndex((x) => x.Week === currentWeek);
+        }
+        setViewableMatches(games.slice(prevIdx, nextIdx + 1));
     }, [cfb_Timestamp, games, isMobile]);
 
     useEffect(() => {
