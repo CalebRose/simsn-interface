@@ -26,7 +26,7 @@ const ConfirmRedshirtModal = (props) => {
                 <div className={modalClass}>
                     <div className="modal-header">
                         <h4 className="modal-title" id="redshirtModalLabel">
-                            Confirm Redshirt?
+                            Confirm Redshirt for {name}?
                         </h4>
                         <button
                             type="button"
