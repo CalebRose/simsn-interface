@@ -230,6 +230,7 @@ const CBBOverviewRow = ({
         const competingIDs = competingTeams.map((x) => x.TeamID);
 
         return competingIDs.map((x) => {
+            console.log({ x });
             const logo = getLogo(SimCBB, x, retro);
             return (
                 <>

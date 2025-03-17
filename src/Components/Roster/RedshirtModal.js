@@ -7,7 +7,7 @@ import routes from '../../Constants/routes';
 const ConfirmRedshirtModal = (props) => {
     const { idx, player, viewMode } = props;
     const modalId = 'redshirtModal' + idx;
-    const name = player.FirstName + ' ' + player.LastName;
+    const name = `${player.Position} ${player.FirstName} ${player.LastName}`;
 
     const confirmChange = () => {
         return props.setRedshirtStatus(player);
@@ -37,9 +37,10 @@ const ConfirmRedshirtModal = (props) => {
                     </div>
                     <div className="modal-body">
                         <div className="row g-2 gy-2 mb-2">
-                            WARNING: Once a redshirt has been placed on {name},
-                            they cannot be on your depth chart. You will not be
-                            able to remove the redshirt from this player.
+                            WARNING: Once a redshirt has been placed on{' '}
+                            <strong>{name}</strong>, they cannot be on your
+                            depth chart. You will not be able to remove the
+                            redshirt from this player.
                         </div>
 
                         <div className="row g-2 gy-2 mb-2">
