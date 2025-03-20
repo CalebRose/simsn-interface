@@ -66,7 +66,7 @@ const MobileRow = ({ data }) => {
                         </button>
                     ) : redshirtCount < 4 &&
                       !player.IsRedshirt &&
-                      ts.CollegeWeek < 3 &&
+                      (ts.CollegeWeek < 3 || ts.CollegeWeek > 20) &&
                       view ? (
                         <button
                             type="button"
@@ -173,7 +173,7 @@ const DesktopRow = ({ data }) => {
                         </button>
                     ) : redshirtCount < 4 &&
                       !player.IsRedshirt &&
-                      ts.CollegeWeek < 3 &&
+                      (ts.CollegeWeek < 3 || ts.CollegeWeek > 20) &&
                       view ? (
                         <button
                             type="button"
