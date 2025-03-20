@@ -109,7 +109,9 @@ const MobileRow = ({ data }) => {
                         className="btn btn-secondary"
                         title={cutPlayerTitle}
                         disabled={
-                            rosterCount < 10 || !view || ts.CollegeWeek > 0
+                            rosterCount < 10 ||
+                            !view ||
+                            (ts.CollegeWeek > 0 && ts.CollegeWeek < 20)
                         }
                         onClick={cut}
                     >
@@ -214,7 +216,9 @@ const DesktopRow = ({ data }) => {
                         className="btn btn-secondary"
                         title={cutPlayerTitle}
                         disabled={
-                            rosterCount < 10 || !view || ts.CollegeWeek > 0
+                            rosterCount < 10 ||
+                            !view ||
+                            (ts.CollegeWeek > 0 && ts.CollegeWeek < 20)
                         }
                         onClick={cut}
                     >
