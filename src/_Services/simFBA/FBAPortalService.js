@@ -44,9 +44,11 @@ export class PortalService {
         return await PostCall(`${u}portal/saveboard`, dto);
     }
 
-    async ExportPortal() {
+    async ExportPortal(isCFB) {
         let json;
-        let fullURL = url + 'portal/export/players';
+        const baseURL = isCFB ? url : BBAURL;
+        let fullURL = baseURL + 'portal/export/players';
+        const league = isCFB ? 'CFB' : 'CBB';
         let response = await fetch(fullURL, {
             headers: {
                 authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -55,7 +57,7 @@ export class PortalService {
             responseType: 'blob'
         })
             .then((res) => res.blob())
-            .then((blob) => saveAs(blob, `OfficialPortalList.csv`));
+            .then((blob) => saveAs(blob, `Official${league}PortalList.csv`));
 
         if (response.ok) {
             console.log('Portal export complete.');

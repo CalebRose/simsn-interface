@@ -380,7 +380,7 @@ const TransferPortal = ({
     };
 
     const ExportPortal = async () => {
-        await _portalService.ExportPortal();
+        await _portalService.ExportPortal(isCFB);
     };
 
     const loadRecords = () => {
