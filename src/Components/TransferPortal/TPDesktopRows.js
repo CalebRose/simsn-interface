@@ -230,7 +230,6 @@ const CBBOverviewRow = ({
         const competingIDs = competingTeams.map((x) => x.TeamID);
 
         return competingIDs.map((x) => {
-            console.log({ x });
             const logo = getLogo(SimCBB, x, retro);
             return (
                 <>
@@ -301,6 +300,9 @@ const CBBOverviewRow = ({
                     <h6>{player.OverallGrade}</h6>
                 </td>
                 <td className="align-middle">
+                    <h6>{player.Finishing}</h6>
+                </td>
+                <td className="align-middle">
                     <h6>{player.Shooting2}</h6>
                 </td>
                 <td className="align-middle">
@@ -308,9 +310,6 @@ const CBBOverviewRow = ({
                 </td>
                 <td className="align-middle">
                     <h6>{player.FreeThrow}</h6>
-                </td>
-                <td className="align-middle">
-                    <h6>{player.Finishing}</h6>
                 </td>
                 <td className="align-middle">
                     <h6>{player.Ballwork}</h6>
@@ -680,6 +679,9 @@ const CBBProfileRow = ({
                     <h6>{CollegePlayer.OverallGrade}</h6>
                 </td>
                 <td className="align-middle">
+                    <h6>{CollegePlayer.Finishing}</h6>
+                </td>
+                <td className="align-middle">
                     <h6>{CollegePlayer.Shooting2}</h6>
                 </td>
                 <td className="align-middle">
@@ -687,9 +689,6 @@ const CBBProfileRow = ({
                 </td>
                 <td className="align-middle">
                     <h6>{CollegePlayer.FreeThrow}</h6>
-                </td>
-                <td className="align-middle">
-                    <h6>{CollegePlayer.Finishing}</h6>
                 </td>
                 <td className="align-middle">
                     <h6>{CollegePlayer.Ballwork}</h6>

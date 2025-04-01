@@ -59,10 +59,10 @@ const CBBTransferPortalHeader = ({ viewMode }) => {
                 <th scope="col">Year</th>
                 <th scope="col">Stars</th>
                 <th scope="col">Ovr.</th>
+                <th scope="col">Finishing</th>
                 <th scope="col">2pt.</th>
                 <th scope="col">3pt.</th>
                 <th scope="col">FT</th>
-                <th scope="col">Finishing</th>
                 <th scope="col">Ballwork</th>
                 <th scope="col">Rebounding</th>
                 <th scope="col">Int. Defense</th>
@@ -151,6 +151,9 @@ const CBBTransferBoardHeader = ({ viewMode, ChangeSort }) => {
                 <th scope="col" onClick={() => ChangeSort('OverallGrade')}>
                     Ovr.
                 </th>
+                <th scope="col" onClick={() => ChangeSort('Finishing')}>
+                    Fin.
+                </th>
                 <th scope="col" onClick={() => ChangeSort('Shooting2')}>
                     2pt.
                 </th>
@@ -159,9 +162,6 @@ const CBBTransferBoardHeader = ({ viewMode, ChangeSort }) => {
                 </th>
                 <th scope="col" onClick={() => ChangeSort('FreeThrow')}>
                     FT
-                </th>
-                <th scope="col" onClick={() => ChangeSort('Finishing')}>
-                    Fin.
                 </th>
                 <th scope="col" onClick={() => ChangeSort('Ballwork')}>
                     Bal.
