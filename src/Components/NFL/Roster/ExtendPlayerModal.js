@@ -581,10 +581,10 @@ export const ExtendNBAPlayerModal = ({
         const totalCost = salary;
         const capsheet = team.Capsheet;
         const y1Value = y1Total * 1;
-        const y2Value = y2Total * 0.9;
-        const y3Value = y3Total * 0.8;
-        const y4Value = y4Total * 0.7;
-        const y5Value = y5Total * 0.6;
+        const y2Value = y2Total * 1;
+        const y3Value = y3Total * 1;
+        const y4Value = y4Total * 1;
+        const y5Value = y5Total * 1;
         const y1Space = GetNBACapSpace(
             ts.Y1Capspace,
             capsheet.Year1Total,

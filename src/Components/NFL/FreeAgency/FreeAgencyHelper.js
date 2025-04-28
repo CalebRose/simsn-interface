@@ -232,12 +232,13 @@ export const ValidateNBARule5 = (len, y1, y2, y3, y4, y5, ovr) => {
 };
 
 const checkYearlyRange = (val1, val2, ovr) => {
+    const minRaise = 1.05 * val1;
+
     if (ovr > 89) {
-        const min = 0.92 * val1;
-        const max = 1.08 * val1;
-        return val2 >= min && val2 <= max;
+        const maxRaise = 1.08 * val1;
+        return val2 >= minRaise && val2 <= maxRaise;
     }
-    return val2 >= val1 + 1;
+    return val2 >= minRaise;
 };
 
 export const CheckForOffer = (player, teamID) => {
