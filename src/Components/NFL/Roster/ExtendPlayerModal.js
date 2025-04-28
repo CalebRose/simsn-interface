@@ -900,10 +900,9 @@ export const ExtendNBAPlayerModal = ({
                                                             : ''
                                                     }
                                                 >
-                                                    5: Yearly amounts do not
-                                                    need to be equal, but bids
-                                                    must be within 8% of the
-                                                    preceding year.
+                                                    5: Yearly amounts must be at
+                                                    least 5% higher than the
+                                                    previous year amount.
                                                 </p>
                                             </div>
                                             <div className="col">
