@@ -674,7 +674,8 @@ export const ExtendNBAPlayerModal = ({
             y2Total,
             y3Total,
             y4Total,
-            y5Total
+            y5Total,
+            MaxRequested || IsSuperMaxQualified
         );
 
         // const canMakeOffer =

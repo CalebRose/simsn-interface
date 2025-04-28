@@ -210,22 +210,31 @@ export const ValidateNBARule4 = (len, y1, y2, y3, y4, y5, min) => {
     return false;
 };
 
-export const ValidateNBARule5 = (len, y1, y2, y3, y4, y5, ovr) => {
+export const ValidateNBARule5 = (
+    len,
+    y1,
+    y2,
+    y3,
+    y4,
+    y5,
+    ovr,
+    maxQualified
+) => {
     if (len === 1) return true;
     let check2 = true;
     let check3 = true;
     let check4 = true;
     let check5 = true;
-    if (len > 4) {
+    if (len > 4 && !maxQualified) {
         check5 = checkYearlyRange(y4, y5, ovr);
     }
-    if (len > 3) {
+    if (len > 3 && !maxQualified) {
         check4 = checkYearlyRange(y3, y4, ovr);
     }
-    if (len > 2) {
+    if (len > 2 && !maxQualified) {
         check3 = checkYearlyRange(y2, y3, ovr);
     }
-    if (len > 1) {
+    if (len > 1 && !maxQualified) {
         check2 = checkYearlyRange(y1, y2, ovr);
     }
     return check2 && check3 && check4 && check5;

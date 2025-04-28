@@ -466,7 +466,8 @@ export const NBAFreeAgentOfferModal = ({
             y3Total,
             y4Total,
             y5Total,
-            player.Overall
+            player.Overall,
+            MaxRequested || IsSuperMaxQualified
         );
 
         const canMakeOffer =
