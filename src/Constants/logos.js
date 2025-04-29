@@ -390,7 +390,7 @@ export const logos = {
     IND_Colts: baseUrl + '/logos/IND_Colts.png',
     JAX_Jaguars: baseUrl + '/logos/JAX_Jaguars.png',
     TEN_Titans: baseUrl + '/logos/Tennessee_Titans_logo.png',
-    DEN_Broncos: baseUrl + '/logos/DEN_Broncos.png',
+    DEN_Broncos: baseUrl + '/logos/denvo_broncos.png',
     KC_Chiefs: baseUrl + '/logos/KC_Chiefs.png',
     LV_Raiders: baseUrl + '/logos/LV_Raiders.png',
     LA_Chargers: baseUrl + '/logos/LA_Chargers.png',
@@ -440,7 +440,7 @@ export const logos = {
     DAL_Mavericks: baseUrl + '/logos/DAL_Mavericks.png',
     HOU_Rockets: baseUrl + '/logos/HOU_Rockets.png',
     MEM_Grizzlies: baseUrl + '/logos/MEM_Grizzlies.png',
-    NO_Pelicans: baseUrl + '/logos/NO_Pelicans.png',
+    NO_Pelicans: baseUrl + '/logos/NO_pelicant.png',
     SA_Spurs: baseUrl + '/logos/SA_Spurs.png',
     SD_Clippers: `${baseUrl}/logos/SDClippers2.png`
 };
