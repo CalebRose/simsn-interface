@@ -225,6 +225,7 @@ export const ValidateNBARule5 = (
     let check3 = true;
     let check4 = true;
     let check5 = true;
+    console.log({ maxQualified, y1, y2, y3, y4, y5 });
     if (len > 4 && !maxQualified) {
         check5 = checkYearlyRange(y4, y5, ovr);
     }
