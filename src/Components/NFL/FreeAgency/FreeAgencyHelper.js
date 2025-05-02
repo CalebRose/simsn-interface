@@ -225,7 +225,6 @@ export const ValidateNBARule5 = (
     let check3 = true;
     let check4 = true;
     let check5 = true;
-    console.log({ maxQualified, y1, y2, y3, y4, y5 });
     if (len > 4 && !maxQualified) {
         check5 = checkYearlyRange(y4, y5, ovr);
     }
@@ -238,16 +237,24 @@ export const ValidateNBARule5 = (
     if (len > 1 && !maxQualified) {
         check2 = checkYearlyRange(y1, y2, ovr);
     }
+    console.log({
+        maxQualified,
+        y1,
+        y2,
+        y3,
+        y4,
+        y5,
+        check2,
+        check3,
+        check4,
+        check5
+    });
+
     return check2 && check3 && check4 && check5;
 };
 
 const checkYearlyRange = (val1, val2, ovr) => {
     const minRaise = 1.05 * val1;
-
-    if (ovr > 89) {
-        const maxRaise = 1.08 * val1;
-        return val2 >= minRaise && val2 <= maxRaise;
-    }
     return val2 >= minRaise;
 };
 

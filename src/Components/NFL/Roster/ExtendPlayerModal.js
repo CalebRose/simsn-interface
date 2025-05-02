@@ -679,14 +679,6 @@ export const ExtendNBAPlayerModal = ({
             MaxRequested || IsSuperMaxQualified
         );
 
-        console.log({
-            isRule1Valid,
-            isRule2Valid,
-            isRule3Valid,
-            isRule4Valid,
-            isRule5Valid
-        });
-
         // const canMakeOffer =
         //     player.IsAcceptingOffers ||
         //     (player.IsNegotiating && hasExistingOffer);
