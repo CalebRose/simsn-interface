@@ -139,11 +139,13 @@ const NBADraftPage = ({ currentUser, cbb_Timestamp, viewMode }) => {
     );
 
     const currentPickTeamLogo = GetPickTeamLogo(
+        SimNBA,
         currentDraftPick,
         currentUser.IsRetro
     );
 
     const nextPickTeamLogo = GetPickTeamLogo(
+        SimNBA,
         nextDraftPick,
         currentUser.IsRetro
     );

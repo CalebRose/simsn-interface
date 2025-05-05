@@ -164,10 +164,10 @@ export const GetNextDraftPickObj = (allDraftPicks, nextDraftPickIdx) => {
     return nextDraftPick;
 };
 
-export const GetPickTeamLogo = (draftPick, isRetro) => {
+export const GetPickTeamLogo = (league, draftPick, isRetro) => {
     const logo = useMemo(() => {
         if (draftPick) {
-            return getLogo(SimNFL, draftPick.TeamID, isRetro);
+            return getLogo(league, draftPick.TeamID, isRetro);
         }
         return null;
     }, [draftPick]);

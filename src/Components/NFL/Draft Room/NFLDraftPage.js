@@ -166,10 +166,12 @@ const NFLDraftPage = ({ currentUser, nflTeam, cfb_Timestamp, viewMode }) => {
         currentRound
     );
     const currentPickTeamLogo = GetPickTeamLogo(
+        SimNFL,
         currentDraftPick,
         currentUser.IsRetro
     );
     const nextPickTeamLogo = GetPickTeamLogo(
+        SimNFL,
         nextDraftPick,
         currentUser.IsRetro
     );
