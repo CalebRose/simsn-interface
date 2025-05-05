@@ -4,7 +4,7 @@ import { getLogo } from '../../Constants/getLogo';
 export const StandingsRow = ({ league, row, rank, retro }) => {
     const logo = getLogo(league, row.TeamID, retro);
     return (
-        <div className="row mb-2" style={{ height: '30px' }}>
+        <div key={row.ID} className="row mb-2" style={{ height: '30px' }}>
             <div className="col" style={{ width: '50px' }}>
                 {rank}
             </div>

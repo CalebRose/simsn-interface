@@ -309,6 +309,7 @@ const CFBHomepage = ({ currentUser, cfbTeam, cfb_Timestamp }) => {
                             return (
                                 <div className="row landing-page-row">
                                     <CFBMatchCard
+                                        key={x.ID}
                                         game={x}
                                         team={cfbTeam}
                                         isNFL={false}

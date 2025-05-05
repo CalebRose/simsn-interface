@@ -43,6 +43,7 @@ const NBADraftPage = ({ currentUser, cbb_Timestamp, viewMode }) => {
         'nbadraftstate',
         'YfIofzhpUVSJITQpBrUA'
     );
+    console.log({ data });
     const [isLoading, setIsLoading] = useState(true);
     const [isAdmin, setIsAdmin] = useState(false);
     const [isPaused, setIsPaused] = useState(true);
@@ -75,7 +76,7 @@ const NBADraftPage = ({ currentUser, cbb_Timestamp, viewMode }) => {
         startAt,
         exportComplete,
         endTime
-    } = data;
+    } = data || {};
     const tableHoverClass = GetTableHoverClass(viewMode);
 
     useEffect(() => {
@@ -438,7 +439,6 @@ const NBADraftPage = ({ currentUser, cbb_Timestamp, viewMode }) => {
         //     allDraftPicks: allDraftObj
         // };
         // updateData(newData);
-        // setDraftPickList(() => res.AllDraftPicks);
         setWarRoom(() => res.WarRoom);
         setAllDraftablePlayers(() => res.DraftablePlayers);
         if (res.WarRoom.ID === currentUser.NBATeamID) {

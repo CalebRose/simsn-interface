@@ -49,6 +49,7 @@ const StandingsCard = ({ standings, league, retro }) => {
             {standingsOne.length > 0 &&
                 standingsOne.map((x, idx) => (
                     <StandingsRow
+                        key={x.ID}
                         row={x}
                         rank={idx + 1}
                         retro={retro}
@@ -60,6 +61,7 @@ const StandingsCard = ({ standings, league, retro }) => {
                     <br />
                     {standingsTwo.map((x, idx) => (
                         <StandingsRow
+                            key={x.ID}
                             row={x}
                             rank={idx + 1}
                             retro={retro}

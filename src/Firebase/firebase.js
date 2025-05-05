@@ -51,10 +51,10 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 export const useFirestore = (collectionName, docName) => {
     const [data, setData] = useState(null);
-    const docRef = useMemo(doc(firestore, collectionName, docName), [
-        collectionName,
-        docName
-    ]);
+    const docRef = useMemo(
+        () => doc(firestore, collectionName, docName),
+        [collectionName, docName]
+    );
     useEffect(() => {
         // const docRef = firebase.firestore().collection(collection).doc(docName);
         const unsubscribe = onSnapshot(docRef, (doc) => {
