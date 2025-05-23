@@ -43,7 +43,6 @@ const NBADraftPage = ({ currentUser, cbb_Timestamp, viewMode }) => {
         'nbadraftstate',
         'YfIofzhpUVSJITQpBrUA'
     );
-    console.log({ data });
     const [isLoading, setIsLoading] = useState(true);
     const [isAdmin, setIsAdmin] = useState(false);
     const [isPaused, setIsPaused] = useState(true);
@@ -205,7 +204,7 @@ const NBADraftPage = ({ currentUser, cbb_Timestamp, viewMode }) => {
 
     // Click Functionality
     const adminSelectTeam = async (team) => {
-        if (isAdmin) {
+        if (!isAdmin) {
             alert('Sorry, but this is something only Tuscan can do for now.');
             return;
         }
@@ -359,20 +358,20 @@ const NBADraftPage = ({ currentUser, cbb_Timestamp, viewMode }) => {
         };
         updateData(newData);
         setTimeout(() => {
-            const endTime = Timestamp.fromDate(
-                new Date(Date.now() + seconds * 1000)
-            );
-            let seconds = 0;
+            let secondsForNextPick = 0;
             if (currentPick < 32) {
-                seconds = 300;
+                secondsForNextPick = 300;
             } else {
-                seconds = 120;
+                secondsForNextPick = 120;
             }
+            const endTime = Timestamp.fromDate(
+                new Date(Date.now() + secondsForNextPick * 1000)
+            );
             const resetTimerData = {
                 ...newData,
                 endTime,
                 isPaused: finalPick,
-                seconds,
+                seconds: secondsForNextPick,
                 startAt: Timestamp.fromDate(new Date(Date.now()))
             };
             updateData(resetTimerData);
