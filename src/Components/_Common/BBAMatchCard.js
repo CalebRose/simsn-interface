@@ -6,26 +6,24 @@ import { SimCBB, SimNBA } from '../../Constants/CommonConstants';
 export const BBAMatchCard = ({ game, team, timestamp, isNBA, retro }) => {
     const currentWeek = !isNBA ? timestamp.CollegeWeek : timestamp.NBAWeek;
     const league = isNBA ? SimNBA : SimCBB;
-    const teamAbbr =
-        !isNBA && team ? team.Abbr : `${team.Team} ${team.Nickname}`;
     const opposingTeam =
-        game.HomeTeam === teamAbbr ? game.AwayTeam : game.HomeTeam;
+        game.HomeTeamID === team.ID ? game.AwayTeam : game.HomeTeam;
     const opposingTeamID =
-        game.HomeTeam === teamAbbr ? game.AwayTeamID : game.HomeTeamID;
+        game.HomeTeamID === team.ID ? game.AwayTeamID : game.HomeTeamID;
     const opposingCoach =
-        game.HomeTeam === teamAbbr ? game.AwayTeamCoach : game.HomeTeamCoach;
+        game.HomeTeamID === team.ID ? game.AwayTeamCoach : game.HomeTeamCoach;
     const opposingRank =
-        game.HomeTeam === teamAbbr ? game.AwayRank : game.HomeRank;
+        game.HomeTeamID === team.ID ? game.AwayRank : game.HomeRank;
     const wonTheMatch =
         game.GameComplete &&
-        ((game.HomeTeam === teamAbbr && game.HomeTeamWin) ||
-            (game.AwayTeam === teamAbbr && game.AwayTeamWin));
+        ((game.HomeTeamID === team.ID && game.HomeTeamWin) ||
+            (game.AwayTeamID === team.ID && game.AwayTeamWin));
     const lostTheMatch =
         game.GameComplete &&
-        ((game.HomeTeam === teamAbbr && game.AwayTeamWin) ||
-            (game.AwayTeam === teamAbbr && game.HomeTeamWin));
+        ((game.HomeTeamID === team.ID && game.AwayTeamWin) ||
+            (game.AwayTeamID === team.ID && game.HomeTeamWin));
     const awayGame =
-        game.HomeTeam === teamAbbr || game.IsNeutral ? false : true;
+        game.HomeTeamID === team.ID || game.IsNeutral ? false : true;
     const opposingTeamLogo = getLogo(league, opposingTeamID, retro);
     const gameWeek = game.Week;
     const ConferenceGame = game.IsConference;

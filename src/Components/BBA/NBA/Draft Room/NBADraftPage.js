@@ -345,6 +345,13 @@ const NBADraftPage = ({ currentUser, cbb_Timestamp, viewMode }) => {
             ...teamInfoFromDP
         };
 
+        let draftingTeam = '';
+        let draftTeamID = 0;
+        if (nextDraftPick) {
+            (draftingTeam = nextDraftPick.Team),
+                (draftTeamID = nextDraftPick.TeamID);
+        }
+
         const newData = {
             ...data,
             currentPick: theNextPick,
@@ -352,8 +359,8 @@ const NBADraftPage = ({ currentUser, cbb_Timestamp, viewMode }) => {
             currentRound: currRound,
             recentlyDraftedPlayerID: player.ID,
             allDraftPicks: draftPicks,
-            draftingTeam: nextDraftPick.Team,
-            draftingTeamID: nextDraftPick.TeamID,
+            draftingTeam: draftingTeam,
+            draftingTeamID: draftTeamID,
             isPaused: true
         };
         updateData(newData);

@@ -26,7 +26,7 @@ import {
     SimNFL
 } from '../../Constants/CommonConstants';
 
-const LandingPage = ({ currentUser }) => {
+const LandingPage = ({ currentUser, nflTeam, cbbTeam, nbaTeam, inbox }) => {
     let _teamService = new BBATeamService();
     let teamService = new FBATeamService();
     const _adminService = new AdminService();
@@ -68,47 +68,46 @@ const LandingPage = ({ currentUser }) => {
         } else {
             setSport('');
         }
+    }, [
+        currentUser?.teamId,
+        currentUser?.NFLTeamID,
+        currentUser?.cbb_id,
+        currentUser?.nba_id
+    ]);
 
-        if (
-            currentUser &&
-            currentUser.NFLTeam !== undefined &&
-            currentUser.NFLTeam.length > 0 &&
-            currentUser.NFLTeamID > 0
-        ) {
-            GetNFLTeam();
-        }
-
-        if (
-            currentUser &&
-            (currentUser.NFLTeamID > 0 || currentUser.teamId > 0)
-        ) {
+    useEffect(() => {
+        if (currentUser?.teamId > 0 && !inbox) {
             getFBAInbox();
         }
+    }, [currentUser?.teamId, currentUser?.NFLTeamID, inbox]);
 
-        if (
-            currentUser &&
-            ((currentUser.cbb_team !== undefined &&
-                currentUser.cbb_team.length > 0) ||
-                currentUser.cbb_id > 0)
-        ) {
+    useEffect(() => {
+        if (currentUser?.NFLTeamID > 0 && !nflTeam) {
+            GetNFLTeam();
+        }
+    }, [currentUser?.NFLTeamID, nflTeam]);
+
+    useEffect(() => {
+        if (currentUser?.cbb_id > 0 && !cbbTeam) {
             GetCBBTeam();
         }
+    }, [currentUser?.cbb_id, cbbTeam]);
 
-        if (
-            currentUser &&
-            currentUser.NBATeam !== undefined &&
-            currentUser.NBATeam.length > 0 &&
-            currentUser.NBATeamID > 0
-        ) {
+    useEffect(() => {
+        if (currentUser?.NBATeamID > 0 && !nbaTeam) {
             GetNBATeam();
         }
+    }, [currentUser?.NBATeamID, cbbTeam]);
+
+    useEffect(() => {
         if (
             currentUser &&
-            (currentUser.cbb_id > 0 || currentUser.NBATeamID > 0)
+            (currentUser.cbb_id > 0 || currentUser.NBATeamID > 0) &&
+            !inbox
         ) {
             getBBAInbox();
         }
-    }, [currentUser]);
+    }, [currentUser?.cbb_id, currentUser?.NBATeamID, inbox]);
 
     const GetCBBTeam = async () => {
         let response = await _teamService.GetTeamByTeamId(currentUser.cbb_id);
@@ -308,8 +307,20 @@ const LandingPage = ({ currentUser }) => {
     );
 };
 
-const mapStateToProps = ({ user: { currentUser } }) => ({
-    currentUser
+const mapStateToProps = ({
+    user: { currentUser },
+    nbaTeam: { nbaTeam },
+    cbbTeam: { cbbTeam },
+    cfbTeam: { cfbTeam },
+    nflTeam: { nflTeam },
+    inbox: inbox
+}) => ({
+    currentUser,
+    nbaTeam,
+    cbbTeam,
+    cfbTeam,
+    nflTeam,
+    inbox
 });
 
 export default connect(mapStateToProps)(LandingPage);
