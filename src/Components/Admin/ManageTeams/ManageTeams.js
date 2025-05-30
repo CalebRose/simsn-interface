@@ -29,13 +29,9 @@ const ManageTeams = ({ currentUser }) => {
     // Click Functions
     const revokeRequest = async (payload) => {
         // DB Request
-        let res = await requestService.RemoveUserFromTeamRequest(payload.reqId);
+        await requestService.RemoveUserFromTeamRequest(payload.reqId);
 
-        if (res.ok) {
-            console.log('Revoke Request:', payload.reqId);
-        } else {
-            throw ('HTTP-Error: Revoke incomplete', res.status);
-        }
+        console.log('Revoke Request:', payload.reqId);
         // Firebase Call
         const emptyObj = {
             username: payload.username,

@@ -1,5 +1,5 @@
 import url from '../../Constants/url.js';
-import { PostCall } from './FetchHelper.js';
+import { GetActionCall, GetCall, PostCall } from './FetchHelper.js';
 
 export default class FBARequestService {
     async GetRequests() {
@@ -137,14 +137,7 @@ export default class FBARequestService {
     }
 
     async RemoveUserFromTeamRequest(teamID) {
-        let res = await fetch(url + 'requests/remove/' + teamID, {
-            headers: {
-                authorization: localStorage.getItem('token'),
-                'Content-Type': 'application/json'
-            },
-            method: 'PUT'
-        });
-        return res;
+        await GetActionCall(`${url}requests/remove/${teamID}`);
     }
 
     async RemoveUserFromNFLTeamRequest(teamID, dto) {
