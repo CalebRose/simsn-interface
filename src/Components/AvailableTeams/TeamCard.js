@@ -36,7 +36,7 @@ const TeamCard = (props) => {
                             alt="logo"
                         />
                     </div>
-                    <div className={isFBS ? `col-6` : 'col-9'}>
+                    <div className="col-6">
                         <div className="card-content card-body">
                             <h5 className="card-title ">{team}</h5>
                             <h6 className="card-subtitle">{mascot}</h6>
@@ -45,9 +45,7 @@ const TeamCard = (props) => {
                                 {conference}
                             </p>
                             {coach.length > 0 && coach !== 'AI' && (
-                                <p className="card-text">
-                                    {!isFBS ? 'Unavailable' : `Coach: ${coach}`}
-                                </p>
+                                <p className="card-text">Coach: {coach}</p>
                             )}
                         </div>
                     </div>
