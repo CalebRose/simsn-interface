@@ -51,57 +51,30 @@ const TeamCard = (props) => {
                             )}
                         </div>
                     </div>
-                    {isFBS && (
-                        <div
-                            className="col-3 d-flex align-items-center justify-content-center"
-                            style={{
-                                paddingTop: '8px',
-                                paddingBottom: '8px',
-                                paddingRight: '8px'
-                            }}
-                        >
-                            <button
-                                type="button"
-                                className="btn btn-outline-primary h-100 w-100"
-                                disabled={
-                                    props.disable ||
-                                    (coach.length > 0 && coach !== 'AI')
-                                }
-                                onClick={sendRequest}
-                            >
-                                {coach.length > 0 && coach !== 'AI'
-                                    ? 'Claimed'
-                                    : 'Request'}
-                            </button>
-                        </div>
-                    )}
-                </div>
-                {/* {isFBS && (coach.length === 0 || coach === 'AI') ? (
-                    <footer
-                        onClick={sendRequest}
-                        className={
-                            props.disable
-                                ? 'card-footer disabled'
-                                : 'card-footer'
-                        }
+
+                    <div
+                        className="col-3 d-flex align-items-center justify-content-center"
+                        style={{
+                            paddingTop: '8px',
+                            paddingBottom: '8px',
+                            paddingRight: '8px'
+                        }}
                     >
-                        <p
-                            className={
-                                props.disable && !requested
-                                    ? 'card-footer-item card-footer-item-disabled'
-                                    : 'card-footer-item card-footer-item-active'
+                        <button
+                            type="button"
+                            className="btn btn-outline-primary h-100 w-100"
+                            disabled={
+                                props.disable ||
+                                (coach.length > 0 && coach !== 'AI')
                             }
+                            onClick={sendRequest}
                         >
-                            {!requested ? 'Request' : 'Request Sent!'}
-                        </p>
-                    </footer>
-                ) : (
-                    <footer className="card-footer disabled">
-                        <p className="card-footer-item card-footer-item-disabled">
-                            {!isFBS ? 'Unavailable' : `Coach: ${coach}`}
-                        </p>
-                    </footer>
-                )} */}
+                            {coach.length > 0 && coach !== 'AI'
+                                ? 'Claimed'
+                                : 'Request'}
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     );
