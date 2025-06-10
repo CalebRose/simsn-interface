@@ -1,3 +1,5 @@
+import NFLContractEvaluator from '../../../_Utility/nflContractEvaluator.json';
+
 // Helper Functions
 export const FilterFreeAgencyPlayers = (
     players,
@@ -42,6 +44,48 @@ export const GetTotalValue = (y1, y2, y3, y4, y5) => {
     let year5 = isNaN(y5) ? 0 : y5;
     return year1 + year2 + year3 + year4 + year5;
 };
+
+export const GetContractValue = (
+    age,
+    year1b,
+    year2b,
+    year3b,
+    year4b,
+    year5b,
+    offer
+) => {
+    const ageStr = `${age}`;
+    const modifiers = NFLContractEvaluator[ageStr];
+    const { Y1B, Y1S, Y2B, Y2S, Y3B, Y3S, Y4B, Y4S, Y5B, Y5S } = modifiers;
+    const y1Bonus = year1b * Y1B;
+    const y1Salary = offer.Y1BaseSalary * Y1S;
+    const y2Bonus = year2b * Y2B;
+    const y2Salary = offer.Y2BaseSalary * Y2S;
+    const y3Bonus = year3b * Y3B;
+    const y3Salary = offer.Y3BaseSalary * Y3S;
+    const y4Bonus = year4b * Y4B;
+    const y4Salary = offer.Y4BaseSalary * Y4S;
+    const y5Bonus = year5b * Y5B;
+    const y5Salary = offer.Y5BaseSalary * Y5S;
+
+    const total =
+        y1Bonus +
+        y2Bonus +
+        y3Bonus +
+        y4Bonus +
+        y5Bonus +
+        y1Salary +
+        y2Salary +
+        y3Salary +
+        y4Salary +
+        y5Salary;
+    return total;
+};
+
+export const GetAAVValue = (total, length) => {
+    return total / length;
+};
+
 export const GetYearlyValue = (bonus, salary) => bonus + salary;
 
 export const GetContractLength = (y1, y2, y3, y4, y5) => {

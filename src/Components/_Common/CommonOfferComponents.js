@@ -280,7 +280,7 @@ export const NFLTotalRow = ({ handleInputChange, offer }) => (
     </>
 );
 
-export const OfferValueRow = ({ handleInputChange, offer }) => (
+export const OfferValueRow = ({ handleInputChange, offer, aav }) => (
     <>
         <div className="row mt-1 text-start">
             <h5>Offer Value</h5>
@@ -327,6 +327,11 @@ export const OfferValueRow = ({ handleInputChange, offer }) => (
                 change={handleInputChange}
                 label="Contract Value"
                 isTotal={true}
+            />
+            <TotalInput
+                name="AAV"
+                value={RoundToTwoDecimals(aav)}
+                label="AAV"
             />
         </div>
     </>

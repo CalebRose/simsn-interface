@@ -9,8 +9,10 @@ import {
     OfferValueRow
 } from '../../_Common/CommonOfferComponents';
 import {
+    GetAAVValue,
     GetCapSpace,
     GetContractLength,
+    GetContractValue,
     GetMaxPercentage,
     GetNBACapSpace,
     GetTotalValue,
@@ -73,11 +75,13 @@ export const ExtendPlayerModal = ({
     const [rule4Valid, setRule4] = useState(true);
     const [rule5Valid, setRule5] = useState(true);
     const [rule6Valid, setRule6] = useState(true);
-    const { MinimumValue } = player;
+    const [aavValue, setAAV] = useState(0);
+    const { MinimumValue, AAV } = player;
     const ovr = GetNFLOverall(player.Overall, player.ShowLetterGrade);
 
     const confirmChange = () => {
-        return extend(player, offer);
+        const off = { ...offer, AAV: aavValue };
+        return extend(player, off);
     };
 
     const handleInputChange = (event) => {
@@ -113,6 +117,7 @@ export const ExtendPlayerModal = ({
         y4Bonus = contractLength > 3 ? bonusByYear : 0;
         y5Bonus = contractLength > 4 ? bonusByYear : 0;
         const totalOverall = BonusTotal + salary;
+        const aav = GetAAVValue(totalOverall, contractLength);
         const capsheet = team.Capsheet;
         const y1Total = GetYearlyValue(y1Bonus, offer.Y1BaseSalary);
         const y2Total = GetYearlyValue(y2Bonus, offer.Y2BaseSalary);
@@ -154,12 +159,14 @@ export const ExtendPlayerModal = ({
             capsheet.Y5Salary,
             capsheet.Y5CapHit
         );
-        const contractValue = GetTotalValue(
-            y1Value,
-            y2Value,
-            y3Value,
-            y4Value,
-            y5Value
+        const contractValue = GetContractValue(
+            player.Age,
+            y1Bonus,
+            y2Bonus,
+            y3Bonus,
+            y4Bonus,
+            y5Bonus,
+            offer
         );
         const updatedOffer = {
             ...offer,
@@ -190,7 +197,14 @@ export const ExtendPlayerModal = ({
             ContractLength: contractLength
         };
 
-        const isRule1Valid = contractLength > 0 && contractLength < 6;
+        const isRule1Valid = ValidateNBARule2(
+            contractLength,
+            y1Total,
+            y2Total,
+            y3Total,
+            y4Total,
+            y5Total
+        );
         const isRule2Valid = ValidateRule2(
             contractLength,
             y1Total,
@@ -236,8 +250,12 @@ export const ExtendPlayerModal = ({
             ? true
             : existingExtension.ContractValue <= contractValue;
 
-        const isValid =
-            isRule1Valid &&
+        const aavMeetsRequirement = aav > player.AAV * 0.7;
+        const contractValueHigherThanMin =
+            contractValue > player.MinimumValue * 0.7;
+
+        const isValid = aavMeetsRequirement && contractValueHigherThanMin;
+        isRule1Valid &&
             isRule2Valid &&
             isRule3Valid &&
             isRule4Valid &&
@@ -254,6 +272,7 @@ export const ExtendPlayerModal = ({
         setRule6(() => isRule6Valid);
         setValidOffer(() => isValid);
         setOffer(() => updatedOffer);
+        setAAV(aav);
     };
 
     useEffect(() => {
@@ -351,8 +370,16 @@ export const ExtendPlayerModal = ({
                                 <p>{player.Contract.ContractLength} Years</p>
                             </div>
                             <div className="col-md-auto ms-auto">
-                                <h5 className="">Minimum Value</h5>
-                                <p>${MinimumValue}M</p>
+                                <div className="row">
+                                    <div className="col">
+                                        <h5 className="">Minimum Value</h5>
+                                        <p>${MinimumValue}M</p>
+                                    </div>
+                                    <div className="col">
+                                        <h5 className="">AAV</h5>
+                                        <p>${AAV}M</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className="row text-start text-small">
@@ -447,6 +474,7 @@ export const ExtendPlayerModal = ({
                         <OfferValueRow
                             handleInputChange={handleInputChange}
                             offer={offer}
+                            aav={aavValue}
                         />
                         <CapRemainingRow
                             offer={offer}
