@@ -197,22 +197,9 @@ const CBBStatsPage = ({ currentUser, viewMode, cbb_Timestamp }) => {
         const seasonID = Number(selectedSeason.value);
         let week = selectedWeek ? Number(selectedWeek.value) : 1;
         if (viewType === 'WEEK') {
-            let startingWeekID = 0;
-            if (seasonID === 1 || seasonID === 2) {
-                // Nothing
-            } else if (seasonID === 3) {
-                startingWeekID = 20;
-                if (leagueView !== 'cbb') {
-                    startingWeekID = 0;
-                }
-            } else if (seasonID === 4) {
-                startingWeekID = 62;
-                // startingWeekID = 40;
-                if (leagueView !== 'cbb') {
-                    startingWeekID = 30;
-                }
-            }
-            week += startingWeekID;
+            const season = seasonID + 2020;
+            const diffSeason = season - 2000;
+            week = diffSeason * 100 + week;
         }
         const res = await _statsService.GetStatsPageData(
             leagueView,
@@ -264,24 +251,9 @@ const CBBStatsPage = ({ currentUser, viewMode, cbb_Timestamp }) => {
         const seasonID = Number(selectedSeason.value);
         let week = selectedWeek ? Number(selectedWeek.value) : 1;
         if (viewType === 'WEEK') {
-            let startingWeekID = 0;
-            if (seasonID === 1 || seasonID === 2) {
-                // Nothing
-            } else if (seasonID === 3) {
-                startingWeekID = 20;
-                if (leagueView !== 'cbb') {
-                    startingWeekID = 0;
-                }
-            } else if (seasonID === 4) {
-                startingWeekID = 62;
-                // startingWeekID = 40;
-                if (leagueView !== 'cbb') {
-                    startingWeekID = 30;
-                }
-            } else {
-                // startingWeekID = 40;
-            }
-            week += startingWeekID;
+            const season = seasonID + 2020;
+            const diffSeason = season - 2000;
+            week = diffSeason * 100 + week;
         }
         // League, Season, Week, Match (A,B,C,D), View Type (SEASON, WEEK), currentView (PLAYER, TEAM)
         await _statsService.ExportStats(

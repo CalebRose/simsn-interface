@@ -173,17 +173,9 @@ const CBBSchedulePage = ({ currentUser, cbbTeam, nbaTeam, cbb_Timestamp }) => {
         const seasonID = Number(selectedSeason.value);
         let week = selectedWeek ? Number(selectedWeek) : 1;
         let nbaWeekID = 0;
-        let startingWeekID = 0;
-        if (seasonID === 1 || seasonID === 2) {
-            // Nothing
-        } else if (seasonID === 3) {
-            nbaWeekID = week;
-            startingWeekID = 20;
-        } else if (seasonID === 4) {
-            nbaWeekID = week + 30;
-            startingWeekID = 62;
-        }
-        week += startingWeekID;
+        const season = seasonID + 2020;
+        const diffSeason = season - 2000;
+        week = diffSeason * 100 + week;
 
         await _matchService.ExportResults(
             seasonID,
