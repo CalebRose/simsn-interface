@@ -26,7 +26,7 @@ const CBBSchedulePage = ({ currentUser, cbbTeam, nbaTeam, cbb_Timestamp }) => {
     const [teamOptions, setTeamOptions] = useState(null);
     const [seasons, setSeasons] = useState(SeasonsList);
     const [selectedTeam, setSelectedTeam] = useState(null);
-    const [selectedWeek, setSelectedWeek] = useState(null);
+    const [selectedWeek, setSelectedWeek] = useState(1);
     const [selectedSeason, setSelectedSeason] = useState(null);
     const [leagueView, setLeagueView] = useState('CBB'); // CBB, NBA, ISL
     const [viewType, setViewType] = useState('WEEK');
@@ -67,18 +67,17 @@ const CBBSchedulePage = ({ currentUser, cbbTeam, nbaTeam, cbb_Timestamp }) => {
         } else {
             gamesView = [...allISLMatches];
         }
-        if (viewType === 'TEAM' && selectedTeam.length > 0) {
+        if (viewType === 'TEAM' && selectedTeam) {
             gamesView = [
                 ...gamesView.filter(
                     (x) =>
-                        x.HomeTeam === selectedTeam ||
-                        x.AwayTeam === selectedTeam
+                        x.HomeTeamID === selectedTeam ||
+                        x.AwayTeamID === selectedTeam
                 )
             ];
         } else {
             gamesView = [...gamesView.filter((x) => x.Week === selectedWeek)];
         }
-
         let lettersArray = [];
         if (showAGames) lettersArray.push('A');
         if (showBGames) lettersArray.push('B');
@@ -108,7 +107,7 @@ const CBBSchedulePage = ({ currentUser, cbbTeam, nbaTeam, cbb_Timestamp }) => {
             const response = await _teamService.GetActiveCollegeTeams();
             teamOptionForm = [
                 ...response.map((x) => {
-                    return { label: x.Team, value: x.Abbr };
+                    return { label: x.Team, value: x.ID };
                 })
             ];
 
@@ -116,7 +115,7 @@ const CBBSchedulePage = ({ currentUser, cbbTeam, nbaTeam, cbb_Timestamp }) => {
         } else {
             teamOptionForm = [
                 ...cbbTeams.map((x) => {
-                    return { label: x.Team, value: x.Abbr };
+                    return { label: x.Team, value: x.ID };
                 })
             ];
         }
@@ -129,13 +128,13 @@ const CBBSchedulePage = ({ currentUser, cbbTeam, nbaTeam, cbb_Timestamp }) => {
             const response = await _teamService.GetNBATeams();
             teamOptionForm = [
                 ...response.map((x) => {
-                    return { label: x.Team, value: `${x.Team} ${x.Nickname}` };
+                    return { label: x.Team, value: x.ID };
                 })
             ];
         } else {
             teamOptionForm = [
                 ...nbaTeams.map((x) => {
-                    return { label: x.Team, value: `${x.Team} ${x.Nickname}` };
+                    return { label: x.Team, value: x.ID };
                 })
             ];
         }
@@ -148,20 +147,18 @@ const CBBSchedulePage = ({ currentUser, cbbTeam, nbaTeam, cbb_Timestamp }) => {
             const response = await _teamService.GetAllISLTeams();
             teamOptionForm = [
                 ...response.map((x) => {
-                    let val = `${x.Team.trim()} ${x.Nickname.trim()}`;
                     return {
                         label: x.Team,
-                        value: val.trim()
+                        value: x.ID
                     };
                 })
             ];
         } else {
             teamOptionForm = [
                 ...islTeams.map((x) => {
-                    let val = `${x.Team.trim()} ${x.Nickname.trim()}`;
                     return {
                         label: x.Team,
-                        value: val.trim()
+                        value: x.ID
                     };
                 })
             ];
@@ -204,13 +201,13 @@ const CBBSchedulePage = ({ currentUser, cbbTeam, nbaTeam, cbb_Timestamp }) => {
     };
 
     const ResetTeamViewOptions = () => {
-        let abbr = cbbTeam.Abbr;
-        if (leagueView === 'NBA') abbr = `${nbaTeam.Team} ${nbaTeam.Nickname}`;
-        setSelectedTeam(() => abbr);
+        let teamID = cbbTeam.ID;
+        if (leagueView === 'NBA') teamID = nbaTeam.ID;
+        setSelectedTeam(() => teamID);
     };
 
     const ResetWeekViewOptions = () => {
-        setSelectedWeek(() => cbb_Timestamp.NBAWeek);
+        setSelectedWeek(() => cbb_Timestamp.CollegeWeek);
     };
 
     // Click Functions
@@ -221,7 +218,7 @@ const CBBSchedulePage = ({ currentUser, cbbTeam, nbaTeam, cbb_Timestamp }) => {
 
     const SelectLeagueView = (event) => {
         const { value } = event.target;
-        setSelectedTeam(() => '');
+        setSelectedTeam(() => null);
         ResetWeekViewOptions();
         setLeagueView(() => value);
     };
