@@ -279,9 +279,8 @@ export const FreeAgentOfferModal = ({
             ? true
             : existingOffer.ContractValue <= contractValue;
 
-        const aavMeetsRequirement = aav > player.AAV * 0.7;
-        const contractValueHigherThanMin =
-            contractValue > player.MinimumValue * 0.7;
+        const aavMeetsRequirement = aav >= player.AAV;
+        const contractValueHigherThanMin = contractValue >= player.MinimumValue;
 
         const isValid =
             aavMeetsRequirement &&
