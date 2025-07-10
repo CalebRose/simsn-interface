@@ -262,7 +262,6 @@ export const NBATradeProposalModal = ({
     const [receiverOptions, setReceiverOptions] = useState([]);
     const [userValue, setUserValue] = useState(0);
     const [receiverValue, setReceiverValue] = useState(0);
-    const [validTrade, setValidTrade] = useState(true);
     const modalId = `tradeProposalModal`;
     const modalClass = GetModalClass(theme);
     const userList = GetOptionList(userPlayers, userPicks, userOptions);
@@ -271,22 +270,6 @@ export const NBATradeProposalModal = ({
         tradablePicks,
         receiverOptions
     );
-
-    const ValidateTrade = () => {
-        let validity = false;
-
-        const userMinRange = userValue * 0.9;
-        const userMaxRange = userValue * 1.1;
-        const recMinRange = receiverValue * 0.9;
-        const recMaxRange = receiverValue * 1.1;
-        validity =
-            receiverValue >= userMinRange &&
-            receiverValue <= userMaxRange &&
-            userValue >= recMinRange &&
-            userValue <= recMaxRange;
-
-        setValidTrade(() => validity);
-    };
 
     const RemoveFromList = (opt, isUser) => {
         const list = isUser ? [...userOptions] : [...receiverOptions];
@@ -312,7 +295,6 @@ export const NBATradeProposalModal = ({
             setReceiverOptions(() => newList);
             setReceiverValue(() => value);
         }
-        ValidateTrade();
     };
 
     const AddToList = (opt, isUser) => {
@@ -337,7 +319,6 @@ export const NBATradeProposalModal = ({
             setReceiverOptions(() => list);
             setReceiverValue(() => totalValue);
         }
-        ValidateTrade();
     };
 
     const ClearOptions = () => {
@@ -408,7 +389,6 @@ export const NBATradeProposalModal = ({
             setReceiverOptions(() => list);
             setReceiverValue(() => listValue);
         }
-        ValidateTrade();
     };
 
     return (
