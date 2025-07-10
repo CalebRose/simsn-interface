@@ -242,10 +242,6 @@ export const ExtendPlayerModal = ({
             offer.Y5BaseSalary
         );
 
-        // const canMakeOffer =
-        //     player.IsAcceptingOffers ||
-        //     (player.IsNegotiating && hasExistingExtension);
-
         const validToExistingOffer = !existingExtension
             ? true
             : existingExtension.ContractValue <= contractValue;
@@ -254,8 +250,10 @@ export const ExtendPlayerModal = ({
         const contractValueHigherThanMin =
             contractValue > player.MinimumValue * 0.7;
 
-        const isValid = aavMeetsRequirement && contractValueHigherThanMin;
-        isRule1Valid &&
+        const isValid =
+            aavMeetsRequirement &&
+            contractValueHigherThanMin &&
+            isRule1Valid &&
             isRule2Valid &&
             isRule3Valid &&
             isRule4Valid &&
