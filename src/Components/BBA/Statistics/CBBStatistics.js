@@ -75,13 +75,6 @@ const CBBStatsPage = ({ currentUser, viewMode, cbb_Timestamp }) => {
     const isMobile = useMediaQuery({ query: `(max-width:844px)` });
 
     useEffect(() => {
-        if (currentUser) {
-            // Get Stats page info
-            // GetStatsPageInfo();
-        }
-    }, [currentUser]);
-
-    useEffect(() => {
         if (players.length > 0 || teams.length > 0) {
             const dataSet =
                 currentView === 'PLAYER' ? [...players] : [...teams];

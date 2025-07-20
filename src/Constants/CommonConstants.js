@@ -367,7 +367,8 @@ export const SeasonsList = [
     { label: '2024', value: 4 },
     { label: '2025', value: 5 },
     { label: '2026', value: 6 },
-    { label: '2027', value: 7 }
+    { label: '2027', value: 7 },
+    { label: '2028', value: 8 }
 ];
 
 export const NFLConferenceList = [

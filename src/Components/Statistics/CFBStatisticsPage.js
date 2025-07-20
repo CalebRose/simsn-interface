@@ -219,7 +219,7 @@ const CFBStatisticsPage = ({ currentUser, cfb_Timestamp, viewMode }) => {
     const GetStatsPageInfo = async () => {
         setFilteredView(() => []);
         setViewableStats(() => []);
-        const seasonID = selectedSeason.value;
+        const seasonID = Number(selectedSeason.value);
         const gameType = selectedGameType.value || '';
         const isCFB = leagueView === 'cfb';
 
@@ -228,18 +228,10 @@ const CFBStatisticsPage = ({ currentUser, cfb_Timestamp, viewMode }) => {
         let startingWeekID = 0;
 
         if (viewType === 'WEEK') {
-            if (seasonID === '1') {
-                startingWeekID = isCFB ? 1 : 0;
-            } else if (seasonID === 2) {
-                startingWeekID = isCFB ? 21 : 0;
-            } else if (seasonID === 3) {
-                startingWeekID = isCFB ? 43 : 21;
-            } else if (seasonID === 4) {
-                startingWeekID = isCFB ? 65 : 26;
-            }
+            const season = seasonID + 2020;
+            const diffSeason = season - 2000;
+            week = diffSeason * 100 + week;
         }
-        week = week + startingWeekID;
-        //
 
         res = await _statsService.GetStatsForStatisticsPage(
             leagueView,
@@ -270,7 +262,7 @@ const CFBStatisticsPage = ({ currentUser, cfb_Timestamp, viewMode }) => {
     };
 
     const ExportStatsPageInfo = async () => {
-        const seasonID = selectedSeason.value;
+        const seasonID = Number(selectedSeason.value);
         const gameType = selectedGameType.value || '';
         const isCFB = leagueView === 'cfb';
 
@@ -280,17 +272,9 @@ const CFBStatisticsPage = ({ currentUser, cfb_Timestamp, viewMode }) => {
         let startingWeekID = 0;
 
         if (viewType === 'WEEK') {
-            if (seasonID === '1') {
-                startingWeekID = isCFB ? 1 : 0;
-            } else if (seasonID === 2) {
-                startingWeekID = isCFB ? 21 : 0;
-            } else if (seasonID === 3) {
-                startingWeekID = isCFB ? 43 : 21;
-            } else if (seasonID === 4) {
-                startingWeekID = isCFB ? 65 : 26;
-            } else if (seasonID === 5) {
-                startingWeekID = isCFB ? 88 : 52;
-            }
+            const season = seasonID + 2020;
+            const diffSeason = season - 2000;
+            week = diffSeason * 100 + week;
         }
         week = week + startingWeekID;
         await _statsService.ExportStatsForStatsPage(
