@@ -20,19 +20,20 @@ const CFBOverviewRow = ({
     retro,
     theme
 }) => {
+    if (!player) return;
     const [flag, setFlag] = useState(false);
     const name = `${player.FirstName} ${player.LastName}`;
     const keyCode = `${player.PlayerID}`;
     const previousLogo =
         player && player.PreviousTeamID > 0
-            ? getLogo(SimCFB, player.PreviousTeam, retro)
+            ? getLogo(SimCFB, player.PreviousTeamID, retro)
             : '';
     const newTeamLogo =
         player && player.TeamID > 0
             ? getLogo(SimCFB, player.TeamID, retro)
             : '';
     const portalModalTarget = '#portalPlayerModal';
-    const loc = `${player.City}, ${player.State}`;
+    const loc = `${player.State}`;
     const mobileClass = GetMobileCardClass(theme);
     useEffect(() => {
         if (portalMap) {
@@ -376,7 +377,18 @@ export const TPOverviewMobileRow = ({
     retro
 }) => {
     return isCFB ? (
-        <CFBOverviewRow />
+        <CFBOverviewRow
+            player={player}
+            rank={rank}
+            portalMap={portalMap}
+            timestamp={timestamp}
+            add={add}
+            viewMode={viewMode}
+            retro={retro}
+            ds={ds}
+            theme={theme}
+            setPortalPlayer={setPortalPlayer}
+        />
     ) : (
         <CBBOverviewRow
             player={player}

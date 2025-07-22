@@ -206,47 +206,43 @@ const ViewCFBTransferPlayerModal = ({
     player['priorityAttributes'] = SetPriority(player);
     return (
         <div className="row d-flex justify-content-start">
-            <div className="col-6">
+            <div className="col-12 col-sm-6">
                 <div className="row">
-                    <div className="col-2">
+                    <div className="col-4 col-sm-2">
                         <h6>Stars</h6>
                         <p className="text-small">{player.Stars}</p>
                     </div>
-                    <div className="col-2">
+                    <div className="col-4 col-sm-2">
                         <h6>Potential</h6>
                         <p className="text-small">{player.PotentialGrade}</p>
                     </div>
-                    <div className="col-2">
+                    <div className="col-4 col-sm-2">
                         <h6>Height</h6>
                         <p className="text-small">{player.Height}</p>
                     </div>
-                    <div className="col-2">
+                    <div className="col-4 col-sm-2">
                         <h6>Weight</h6>
                         <p className="text-small">{player.Height}</p>
                     </div>
-                    <div className="col-2">
+                    <div className="col-4 col-sm-2">
                         <h6>State</h6>
                         <p className="text-small">{player.State}</p>
                     </div>
-                    <div className="col-2">
-                        <h6>Country</h6>
-                        <p className="text-small">{player.Country}</p>
-                    </div>
                 </div>
                 <div className="row">
-                    <div className="col-2">
+                    <div className="col-4 col-sm-2">
                         <h6>Recruiting Bias</h6>
                         <p className="text-small">{player.RecruitingBias}</p>
                     </div>
-                    <div className="col-2">
+                    <div className="col-4 col-sm-2">
                         <h6>Work Ethic</h6>
                         <p className="text-small">{player.WorkEthic}</p>
                     </div>
-                    <div className="col-2">
+                    <div className="col-4 col-sm-2">
                         <h6>Academic Bias</h6>
                         <p className="text-small">{player.AcademicBias}</p>
                     </div>
-                    <div className="col-2">
+                    <div className="col-4 col-sm-2">
                         <h6>Personality</h6>
                         <p className="text-small">{player.Personality}</p>
                     </div>
@@ -258,17 +254,19 @@ const ViewCFBTransferPlayerModal = ({
                             {player.priorityAttributes &&
                                 player.priorityAttributes.length > 0 &&
                                 player.priorityAttributes.map((attribute) => (
-                                    <AttributeRow
-                                        key={attribute.Name}
-                                        data={attribute}
-                                        theme={viewMode}
-                                    />
+                                    <div className="col-4 col-sm-2">
+                                        <AttributeRow
+                                            key={attribute.Name}
+                                            data={attribute}
+                                            theme={viewMode}
+                                        />
+                                    </div>
                                 ))}
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="col-6">
+            <div className="col-12 col-sm-6">
                 <div className="row mb-2">
                     <div className="col-auto">
                         <h5>
