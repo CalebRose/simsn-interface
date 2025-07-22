@@ -122,10 +122,7 @@ const PlayerRow = (props) => {
                         className="btn btn-secondary"
                         title={cutPlayerTitle}
                         disabled={
-                            rosterCount < 80 ||
-                            !view ||
-                            (ts.CollegeWeek > 0 && ts.CollegeWeek < 21) ||
-                            ts.TransferPortalPhase !== 3
+                            !view || (ts.CollegeWeek > 0 && ts.CollegeWeek < 21)
                         }
                         onClick={cut}
                     >
