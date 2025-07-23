@@ -749,6 +749,18 @@ const TransferPortal = ({
                                 )}
                                 {activeView === 'Team Board' && (
                                     <>
+                                        <div className="row d-flex justify-content-end mb-2">
+                                            <div className="col-auto">
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-warning"
+                                                    onClick={SaveBoard}
+                                                    disabled={!isValid}
+                                                >
+                                                    Save Board
+                                                </button>
+                                            </div>
+                                        </div>
                                         {isMobile ? (
                                             <>
                                                 {portalProfiles &&
@@ -793,18 +805,6 @@ const TransferPortal = ({
                                             </>
                                         ) : (
                                             <>
-                                                <div className="row d-flex justify-content-end">
-                                                    <div className="col-auto">
-                                                        <button
-                                                            type="button"
-                                                            className="btn btn-warning"
-                                                            onClick={SaveBoard}
-                                                            disabled={!isValid}
-                                                        >
-                                                            Save Board
-                                                        </button>
-                                                    </div>
-                                                </div>
                                                 <div
                                                     className={`row mt-3 mb-5 dashboard-table-height${
                                                         viewMode === 'dark'
