@@ -107,9 +107,9 @@ const NFLDraftPage = ({ currentUser, nflTeam, cfb_Timestamp, viewMode }) => {
         draftingTeamID,
         exportComplete,
         endTime
-    } = data;
+    } = data || {};
 
-    const { approvedRequests } = approvedTrades;
+    const { approvedRequests } = approvedTrades || {};
 
     useEffect(() => {
         if (!endTime || isPaused) return;
