@@ -108,7 +108,7 @@ const NFLDraftPage = ({ currentUser, nflTeam, cfb_Timestamp, viewMode }) => {
         exportComplete,
         endTime
     } = data || {};
-
+    console.log("If you're reading this, you shouldn't be looking here.");
     const { approvedRequests } = approvedTrades || {};
 
     useEffect(() => {
@@ -125,6 +125,23 @@ const NFLDraftPage = ({ currentUser, nflTeam, cfb_Timestamp, viewMode }) => {
 
         return () => clearInterval(intervalId);
     }, [endTime, isPaused]);
+
+    useEffect(() => {
+        if (currentUser && !warRoom) {
+            const adminStatus = currentUser.roleID === 'Admin';
+            setIsAdmin(() => adminStatus);
+            if (!warRoom) {
+                GetDraftPageData(currentUser.NFLTeamID);
+            }
+        }
+    }, [currentUser, warRoom]);
+
+    useEffect(() => {
+        if (!data?.endTime) return;
+        setEndTime(data.endTime.toDate());
+        setIsPaused(data.isPaused);
+        setTimeLeft(data.seconds);
+    }, [data]);
 
     // For mobile
     useEffect(() => {
@@ -195,29 +212,6 @@ const NFLDraftPage = ({ currentUser, nflTeam, cfb_Timestamp, viewMode }) => {
     const ResetTimer = () => {
         GetResetTimer(data, updateData);
     };
-
-    useEffect(() => {
-        if (currentUser) {
-            const adminStatus = currentUser.roleID === 'Admin';
-            setIsAdmin(() => adminStatus);
-            if (!warRoom && nflTeams.length === 0) {
-                GetDraftPageData(currentUser.NFLTeamID);
-            }
-        }
-    }, [currentUser, warRoom, nflTeams]);
-
-    useEffect(() => {
-        if (data) {
-            if (data.endTime) {
-                setEndTime(() => data.endTime.toDate());
-            }
-            setIsPaused(() => data.isPaused);
-            setTimeLeft(() => data.seconds);
-            if (data.startTime) {
-                setStartTime(() => data.startAt.toDate());
-            }
-        }
-    }, [data]);
 
     // API Calls
     const GetDraftPageData = async (id) => {

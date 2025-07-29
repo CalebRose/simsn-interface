@@ -3,22 +3,20 @@ import { getLogo } from '../Constants/getLogo';
 import { SimNFL } from '../Constants/CommonConstants';
 
 export const GetPicksByCurrentRound = (draftList, currentRound) => {
-    const currentRoundOfPicks = useMemo(() => {
+    return useMemo(() => {
         if (draftList && currentRound > 0) {
             const round = draftList[currentRound];
             if (round) return round;
         }
         return [];
     }, [draftList, currentRound]);
-
-    return currentRoundOfPicks;
 };
 
 export const GetRecentlyDraftedPlayer = (
     allDraftablePlayers,
     recentlyDraftedPlayerID
 ) => {
-    const recentlyDraftedPlayer = useMemo(() => {
+    return useMemo(() => {
         if (allDraftablePlayers) {
             const idx = allDraftablePlayers.findIndex(
                 (x) => x.ID === recentlyDraftedPlayerID
@@ -30,11 +28,10 @@ export const GetRecentlyDraftedPlayer = (
         }
         return 'P David Ross';
     }, [allDraftablePlayers, recentlyDraftedPlayerID]);
-    return recentlyDraftedPlayer;
 };
 
 export const useDraftMapNFL = (allDraftPicks) => {
-    const draftMap = useMemo(() => {
+    return useMemo(() => {
         const draftMapObj = {};
         if (allDraftPicks) {
             for (let i = 1; i < 8; i++) {
@@ -49,12 +46,10 @@ export const useDraftMapNFL = (allDraftPicks) => {
         }
         return draftMapObj;
     }, [allDraftPicks]);
-
-    return draftMap;
 };
 
 export const useDraftMap = (allDraftPicks) => {
-    const draftMap = useMemo(() => {
+    return useMemo(() => {
         const draftMapObj = {};
         if (allDraftPicks) {
             for (let i = 1; i <= 2; i++) {
@@ -69,8 +64,6 @@ export const useDraftMap = (allDraftPicks) => {
         }
         return draftMapObj;
     }, [allDraftPicks]);
-
-    return draftMap;
 };
 
 export const GetCurrentDraftPickIdx = (
@@ -78,7 +71,7 @@ export const GetCurrentDraftPickIdx = (
     currentPick,
     currentRound
 ) => {
-    const currentDraftPickIdx = useMemo(() => {
+    return useMemo(() => {
         if (allDraftPicks) {
             const roundOfPicks = allDraftPicks[currentRound];
             const idx = roundOfPicks.findIndex(
@@ -94,7 +87,6 @@ export const GetCurrentDraftPickIdx = (
         }
         return -1;
     }, [allDraftPicks, currentPick, currentRound]);
-    return currentDraftPickIdx;
 };
 
 export const GetNBACurrentDraftPickIdx = (
@@ -102,7 +94,7 @@ export const GetNBACurrentDraftPickIdx = (
     currentPick,
     currentRound
 ) => {
-    const currentDraftPickIdx = useMemo(() => {
+    return useMemo(() => {
         if (allDraftPicks) {
             const roundOfPicks = allDraftPicks[currentRound];
             const idx = roundOfPicks.findIndex(
@@ -118,7 +110,6 @@ export const GetNBACurrentDraftPickIdx = (
         }
         return -1;
     }, [allDraftPicks, currentPick, currentRound]);
-    return currentDraftPickIdx;
 };
 
 export const GetCurrentDraftPick = (
@@ -127,7 +118,7 @@ export const GetCurrentDraftPick = (
     currentPick,
     currentRound
 ) => {
-    const currentDraftPick = useMemo(() => {
+    return useMemo(() => {
         if (allDraftPicks && currentRound > 0 && currentDraftPickIdx >= 0) {
             const roundOfPicks = allDraftPicks[currentRound];
             let indexCheck = roundOfPicks.findIndex(
@@ -141,38 +132,33 @@ export const GetCurrentDraftPick = (
         }
         return null;
     }, [allDraftPicks, currentDraftPickIdx, currentRound]);
-    return currentDraftPick;
 };
 
 export const GetNextDraftPickIdx = (allDraftPicks, nextPick) => {
-    const nextDraftPickIdx = useMemo(() => {
+    return useMemo(() => {
         if (allDraftPicks) {
             return allDraftPicks.findIndex((x) => x.DraftNumber === nextPick);
         }
         return -1;
     }, [allDraftPicks, nextPick]);
-    return nextDraftPickIdx;
 };
 
 export const GetNextDraftPickObj = (allDraftPicks, nextDraftPickIdx) => {
-    const nextDraftPick = useMemo(() => {
+    return useMemo(() => {
         if (allDraftPicks && nextDraftPickIdx >= 0) {
             return allDraftPicks[nextDraftPickIdx];
         }
         return null;
     }, [allDraftPicks, nextDraftPickIdx]);
-    return nextDraftPick;
 };
 
 export const GetPickTeamLogo = (league, draftPick, isRetro) => {
-    const logo = useMemo(() => {
+    return useMemo(() => {
         if (draftPick) {
             return getLogo(league, draftPick.TeamID, isRetro);
         }
         return null;
     }, [draftPick]);
-
-    return logo;
 };
 
 export const GetViewablePlayersList = (
@@ -182,7 +168,7 @@ export const GetViewablePlayersList = (
     selectedArchetypes,
     viewCount
 ) => {
-    const viewablePlayers = useMemo(() => {
+    return useMemo(() => {
         let list = [];
         if (allDraftablePlayers && allDraftablePlayers.length > 0) {
             list = [...allDraftablePlayers];
@@ -209,11 +195,10 @@ export const GetViewablePlayersList = (
         selectedColleges,
         viewCount
     ]);
-    return viewablePlayers;
 };
 
 export const GetTradeWarRoom = (nflWarRoom, col) => {
-    const tradeWarRoom = useMemo(() => {
+    return useMemo(() => {
         let room = {};
         if (nflWarRoom && col && col.length > 0) {
             const roomIdx = col.findIndex((x) => x.id === nflWarRoom.Team);
@@ -221,5 +206,4 @@ export const GetTradeWarRoom = (nflWarRoom, col) => {
         }
         return room;
     }, [nflWarRoom, col]);
-    return tradeWarRoom;
 };

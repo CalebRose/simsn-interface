@@ -78,16 +78,15 @@ export const useFirestore = (collectionName, docName) => {
 
 export const useFireStoreCollection = (collectionName) => {
     const [data, setData] = useState([]);
-    const collectionRef = collection(firestore, collectionName);
-
+    const collectionRef = useMemo(
+        () => collection(firestore, collectionName),
+        [collectionName]
+    );
     useEffect(() => {
         const unsubscribe = onSnapshot(collectionRef, (snapshot) => {
-            setData(
-                snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-            );
+            setData(snapshot.docs.map((d) => ({ ...d.data(), id: d.id })));
         });
-
-        return () => unsubscribe();
+        return unsubscribe;
     }, [collectionRef]);
 
     const updateDocument = useCallback(
