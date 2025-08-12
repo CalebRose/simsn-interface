@@ -17,7 +17,7 @@ module.exports = (env, argv) => {
             filename: isProduction ? '[name].[contenthash].js' : 'bundle.js',
             path: path.resolve(__dirname, './public'),
             clean: true,
-            publicPath: '/' // set to /simsn-interface/ when in debug
+            publicPath: isProduction ? '/simsn-interface/' : '/'
         },
         ...(isProduction
             ? {}
@@ -73,7 +73,25 @@ module.exports = (env, argv) => {
         },
         optimization: {
             minimize: isProduction,
-            minimizer: isProduction ? [new TerserPlugin()] : []
+            minimizer: isProduction ? [new TerserPlugin()] : [],
+            splitChunks: isProduction
+                ? {
+                      chunks: 'all',
+                      cacheGroups: {
+                          vendor: {
+                              test: /[\\/]node_modules[\\/]/,
+                              name: 'vendors',
+                              chunks: 'all'
+                          },
+                          common: {
+                              name: 'common',
+                              minChunks: 2,
+                              chunks: 'all',
+                              enforce: true
+                          }
+                      }
+                  }
+                : {}
         },
         plugins: [
             new HtmlWebpackPlugin({
@@ -81,6 +99,8 @@ module.exports = (env, argv) => {
                 filename: 'index.html',
                 inject: 'body',
                 scriptLoading: 'defer',
+                hash: false, // Prevent duplicate injections
+                cache: true,
                 minify: isProduction
                     ? {
                           removeComments: true,
