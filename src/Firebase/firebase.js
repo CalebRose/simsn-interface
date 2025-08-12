@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import {
     getFirestore,
@@ -22,9 +22,21 @@ const config = {
     appId: config_env.appId,
     measurementId: config_env.measurementId
 };
-const app = initializeApp(config);
+
+// Ensure Firebase is only initialized once
+const app = getApps().length === 0 ? initializeApp(config) : getApp();
 const auth = getAuth(app);
 const firestore = getFirestore(app);
+console.log('Firebase apps:', getApps().length); // should be 1
+
+// Memoize the Google provider to avoid recreating it
+const provider = (() => {
+    const googleProvider = new GoogleAuthProvider();
+    googleProvider.setCustomParameters({
+        prompt: 'select_account'
+    });
+    return googleProvider;
+})();
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) return;
@@ -102,10 +114,5 @@ export const useFireStoreCollection = (collectionName) => {
     return [data, updateDocument];
 };
 
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({
-    prompt: 'select_account'
-});
-
-export const signInWithGoogle = () => signInWithPopup(provider);
+export const signInWithGoogle = () => signInWithPopup(auth, provider);
 export { auth, firestore };

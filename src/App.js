@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Redux
@@ -8,9 +8,11 @@ import { setCBBTimestamp } from './Redux/timestamp/timestamp.actions';
 import { setCFBTimestamp } from './Redux/timestamp/timestamp.actions';
 
 // Firebase
-import { getAuth, onAuthStateChanged, getIdToken } from 'firebase/auth';
-import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import { firestore } from './Firebase/firebase';
+
+// Auth Context
+import { useAuth } from './Context/AuthProvider';
 // CSS
 import './style.css';
 
@@ -21,52 +23,57 @@ import BBAAdminService from './_Services/simNBA/BBAAdminService';
 
 const App = ({ setCurrentUser, setCBBTimestamp, setCFBTimestamp }) => {
     const navigate = useNavigate(); // ✅ Hooks are now inside a functional component
-    const authInstance = getAuth();
-    const _adminService = new AdminService();
-    const _bbaAdminService = new BBAAdminService();
+
+    // Memoize service instances to prevent recreation on every render
+    const _adminService = useRef(new AdminService()).current;
+    const _bbaAdminService = useRef(new BBAAdminService()).current;
+
+    // Get authenticated user from context
+    const { user, loading } = useAuth();
+
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(
-            authInstance,
-            async (userAuth) => {
-                if (userAuth) {
-                    const userRef = doc(firestore, `users/${userAuth.uid}`);
-                    const snapShot = await getDoc(userRef);
+        if (loading) return; // Wait for auth to initialize
 
-                    if (snapShot.exists()) {
-                        setCurrentUser({
-                            id: snapShot.id,
-                            ...snapShot.data()
-                        });
-                    }
+        if (!user) {
+            setCurrentUser(null);
+            return;
+        }
 
-                    // Subscribe to real-time updates
-                    onSnapshot(userRef, (snapshot) => {
-                        if (snapshot.exists()) {
-                            setCurrentUser({
-                                id: snapshot.id,
-                                ...snapshot.data()
-                            });
-                        }
-                    });
-
-                    const cfbTS = await _adminService.GetCurrentTimestamp();
-                    const cbbTS = await _bbaAdminService.GetCurrentTimestamp();
-                    setCFBTimestamp(cfbTS);
-                    setCBBTimestamp(cbbTS);
-
-                    // Fetch ID Token
-                    try {
-                        const idToken = await getIdToken(userAuth);
-                        localStorage.setItem('token', idToken);
-                    } catch (error) {
-                        console.error('Error getting ID Token:', error);
-                    }
-                }
+        const userRef = doc(firestore, `users/${user.uid}`);
+        const unsub = onSnapshot(userRef, (snap) => {
+            if (snap.exists()) {
+                setCurrentUser({ id: snap.id, ...snap.data() });
+            } else {
+                setCurrentUser({
+                    id: user.uid,
+                    email: user.email ?? '',
+                    username: user.displayName ?? user.email ?? ''
+                });
             }
-        );
+        });
+        return unsub;
+    }, [user, loading, setCurrentUser]);
 
-        return () => unsubscribe(); // Cleanup function to avoid memory leaks
-    }, [setCurrentUser]);
+    // fetch timestamps just once per session
+    const fetchedRef = useRef(false);
+    useEffect(() => {
+        if (!user || fetchedRef.current) return;
+        fetchedRef.current = true;
+        (async () => {
+            const [cfbTS, cbbTS] = await Promise.all([
+                _adminService.GetCurrentTimestamp(),
+                _bbaAdminService.GetCurrentTimestamp()
+            ]);
+            setCFBTimestamp(cfbTS);
+            setCBBTimestamp(cbbTS);
+        })().catch(console.error);
+    }, [
+        user,
+        _adminService,
+        _bbaAdminService,
+        setCFBTimestamp,
+        setCBBTimestamp
+    ]);
 
     return <Home />;
 };

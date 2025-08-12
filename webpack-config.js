@@ -7,61 +7,106 @@ const crypto_orig_createHash = crypto.createHash;
 crypto.createHash = (algorithm) =>
     crypto_orig_createHash(algorithm == 'md4' ? 'sha256' : algorithm);
 
-module.exports = {
-    entry: [path.resolve(__dirname, './src/index.js')],
-    mode: 'production',
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, './public'),
-        clean: true,
-        publicPath: '/' // set to /simsn-interface/ when in debug
-    },
-    devServer: {
-        static: {
-            directory: path.join(__dirname, 'dist')
+module.exports = (env, argv) => {
+    const isProduction = argv.mode === 'production';
+
+    return {
+        entry: [path.resolve(__dirname, './src/index.js')],
+        mode: isProduction ? 'production' : 'development',
+        output: {
+            filename: isProduction ? '[name].[contenthash].js' : 'bundle.js',
+            path: path.resolve(__dirname, './public'),
+            clean: true,
+            publicPath: '/' // set to /simsn-interface/ when in debug
         },
-        historyApiFallback: true, // Fixes routing issues with React Router
-        compress: true,
-        port: 3000,
-        hot: true // Enable Hot Module Replacement (HMR)
-    },
-    devtool: 'source-map',
-    module: {
-        rules: [
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react']
+        ...(isProduction
+            ? {}
+            : {
+                  devServer: {
+                      static: {
+                          directory: path.join(__dirname, 'dist')
+                      },
+                      historyApiFallback: true, // Fixes routing issues with React Router
+                      compress: true,
+                      port: 3000,
+                      hot: true, // Enable Hot Module Replacement (HMR)
+                      liveReload: false, // Disable live reload to prevent double renders
+                      client: {
+                          overlay: {
+                              errors: true,
+                              warnings: false // Hide warnings overlay to reduce noise
+                          },
+                          reconnect: 3 // Limit reconnection attempts
+                      }
+                  }
+              }),
+        devtool: isProduction ? 'source-map' : 'eval-cheap-module-source-map',
+        module: {
+            rules: [
+                {
+                    test: /\.(js|jsx)$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                '@babel/preset-env',
+                                '@babel/preset-react'
+                            ]
+                        }
                     }
+                },
+                {
+                    test: /\.css$/,
+                    use: [
+                        isProduction
+                            ? MiniCssExtractPlugin.loader
+                            : 'style-loader',
+                        'css-loader'
+                    ]
+                },
+                {
+                    test: /\.(jpe?g|png|gif|svg)$/i,
+                    type: 'asset/resource'
                 }
-            },
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
-            },
-            {
-                test: /\.(jpe?g|png|gif|svg)$/i,
-                type: 'asset/resource'
-            }
-        ]
-    },
-    optimization: {
-        minimize: true,
-        minimizer: [new TerserPlugin()] // Minify JS
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: './public/index.html',
-            filename: 'index.html',
-            inject: 'body'
-        }),
-        new MiniCssExtractPlugin({ filename: '[name].css' })
-    ],
-    resolve: {
-        extensions: ['.tsx', '.ts', '.jsx', '.js', '.css']
-    },
-    watch: false
+            ]
+        },
+        optimization: {
+            minimize: isProduction,
+            minimizer: isProduction ? [new TerserPlugin()] : []
+        },
+        plugins: [
+            new HtmlWebpackPlugin({
+                template: './public/index.html',
+                filename: 'index.html',
+                inject: 'body',
+                scriptLoading: 'defer',
+                minify: isProduction
+                    ? {
+                          removeComments: true,
+                          collapseWhitespace: true,
+                          removeRedundantAttributes: true,
+                          useShortDoctype: true,
+                          removeEmptyAttributes: true,
+                          removeStyleLinkTypeAttributes: true,
+                          keepClosingSlash: true,
+                          minifyJS: true,
+                          minifyCSS: true,
+                          minifyURLs: true
+                      }
+                    : false
+            }),
+            ...(isProduction
+                ? [
+                      new MiniCssExtractPlugin({
+                          filename: '[name].[contenthash].css'
+                      })
+                  ]
+                : [])
+        ],
+        resolve: {
+            extensions: ['.tsx', '.ts', '.jsx', '.js', '.css']
+        },
+        watch: false
+    };
 };
