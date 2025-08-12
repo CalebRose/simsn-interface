@@ -99,8 +99,9 @@ module.exports = (env, argv) => {
                 filename: 'index.html',
                 inject: 'body',
                 scriptLoading: 'defer',
-                hash: false, // Prevent duplicate injections
-                cache: true,
+                hash: false,
+                cache: false, // Disable cache to prevent duplicates
+                chunks: ['main', 'vendors'], // Explicitly specify chunks
                 minify: isProduction
                     ? {
                           removeComments: true,
