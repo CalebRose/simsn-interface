@@ -95,13 +95,13 @@ module.exports = (env, argv) => {
         },
         plugins: [
             new HtmlWebpackPlugin({
-                template: './public/index.html',
+                template: './src/index.html', // Use clean template from src
                 filename: 'index.html',
                 inject: 'body',
                 scriptLoading: 'defer',
                 hash: false,
                 cache: false, // Disable cache to prevent duplicates
-                chunks: ['main', 'vendors'], // Explicitly specify chunks
+                excludeChunks: [], // Don't exclude any chunks
                 minify: isProduction
                     ? {
                           removeComments: true,
