@@ -355,9 +355,6 @@ const NFLDraftPage = ({ currentUser, nflTeam, cfb_Timestamp, viewMode }) => {
         };
         updateData(newData);
         setTimeout(() => {
-            const endTime = Timestamp.fromDate(
-                new Date(Date.now() + seconds * 1000)
-            );
             let seconds = 0;
             if (currentPick < 33) {
                 seconds = 300;
@@ -366,6 +363,9 @@ const NFLDraftPage = ({ currentUser, nflTeam, cfb_Timestamp, viewMode }) => {
             } else {
                 seconds = 120;
             }
+            const endTime = Timestamp.fromDate(
+                new Date(Date.now() + seconds * 1000)
+            );
             const resetTimerData = {
                 ...newData,
                 endTime,
@@ -719,7 +719,7 @@ const NFLDraftPage = ({ currentUser, nflTeam, cfb_Timestamp, viewMode }) => {
                                 />
                             </div>
                         )}
-                        {!currentDraftPick && !nextDraftPick && (
+                        {!exportComplete && (
                             <div className="col-auto px-4">
                                 <h6>Draft is Complete!</h6>
                                 <button

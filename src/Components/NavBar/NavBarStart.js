@@ -170,7 +170,7 @@ const NavBar_Start = ({ currentUser, cbb_Timestamp, cfb_Timestamp }) => {
                             Trade Block
                         </Link>
                     </li>
-                    {cfb_Timestamp && cfb_Timestamp.IsNFLOffSeason && (
+                    {cfb_Timestamp && (
                         <li>
                             <Link
                                 to={routes.NFL_DRAFT_ROOM}

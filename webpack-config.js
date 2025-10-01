@@ -17,7 +17,7 @@ module.exports = (env, argv) => {
             filename: isProduction ? '[name].[contenthash].js' : 'bundle.js',
             path: path.resolve(__dirname, './public'),
             clean: true,
-            publicPath: isProduction ? '/simsn-interface/' : '/'
+            publicPath: '/'
         },
         ...(isProduction
             ? {}

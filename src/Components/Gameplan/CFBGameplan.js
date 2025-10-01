@@ -820,9 +820,11 @@ const CFBGameplan = ({ currentUser, cfbTeam, nflTeam, isNFL }) => {
             gp.PassQuick +
             gp.PassShort +
             gp.PassLong +
+            gp.PassDeep +
             gp.PassScreen +
             gp.PassPAShort +
-            gp.PassPALong;
+            gp.PassPALong +
+            gp.PassPADeep;
 
         const validPass = ValidatePlayDistribution(
             currentDistribution,
@@ -1913,14 +1915,19 @@ const CFBGameplan = ({ currentUser, cfbTeam, nflTeam, isNFL }) => {
                                                                 const name =
                                                                     'Pass' + x;
                                                                 let label = x;
-                                                                if (idx === 4) {
+                                                                if (idx === 5) {
                                                                     label =
-                                                                        'Play Action Short';
+                                                                        'Play Action Medium';
                                                                 } else if (
-                                                                    idx === 5
+                                                                    idx === 6
                                                                 ) {
                                                                     label =
                                                                         'Play Action Long';
+                                                                } else if (
+                                                                    idx === 7
+                                                                ) {
+                                                                    label =
+                                                                        'Play Action Deep';
                                                                 }
 
                                                                 return (

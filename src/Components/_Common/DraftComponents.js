@@ -253,6 +253,9 @@ export const AttributeColumn = ({
 
     const revealAttr = (event) => {
         const { name, value } = event.currentTarget;
+        if (name === 'ShowAttribute9' || name === 'ShowAttribute10') {
+            return;
+        }
         return reveal(playerIdx, profile, name, value);
     };
 
@@ -302,7 +305,8 @@ export const ScoutPlayerRow = ({
     const modalTarget = `#drafteeModal`;
     const attrList = GetScoutableAttributes(
         Draftee.Position,
-        Draftee.Archetype
+        Draftee.Archetype,
+        Draftee.PositionTwo
     );
     const heightObj = HeightToFeetAndInches(Draftee.Height);
 
@@ -334,6 +338,13 @@ export const ScoutPlayerRow = ({
                         <h5 className="card-title mb-1">
                             {Draftee.Position} {Draftee.Archetype}
                         </h5>
+                        {Draftee.PositionTwo.length > 0 && (
+                            <>
+                                <h6 className="card-subtitle mb-1">
+                                    {Draftee.PositionTwo} {Draftee.ArchetypeTwo}
+                                </h6>
+                            </>
+                        )}
                         <h6 className="card-subtitle text-body-secondary mb-1">
                             {Draftee.Age} year old player from {Draftee.College}
                         </h6>

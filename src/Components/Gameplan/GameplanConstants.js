@@ -1220,9 +1220,11 @@ export const PassPlayLabels = [
     'Quick',
     'Short',
     'Long',
+    'Deep',
     'Screen',
     'PAShort',
-    'PALong'
+    'PALong',
+    'PADeep'
 ];
 export const TargetingLabels = [
     'WR1',

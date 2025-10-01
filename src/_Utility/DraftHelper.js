@@ -92,10 +92,12 @@ export const GetResetTimer = (data, updateData) => {
     updateData(newData);
 };
 
-export const GetScoutableAttributes = (pos, arch) => {
+export const GetScoutableAttributes = (pos, arch, posTwo) => {
+    let attrs = [];
+
     switch (pos) {
         case 'QB':
-            return [
+            attrs = attrs.concat([
                 'Throw Power',
                 'Throw Accuracy',
                 'Football IQ',
@@ -103,9 +105,11 @@ export const GetScoutableAttributes = (pos, arch) => {
                 'Speed',
                 'Stamina',
                 'Potential Grade'
-            ];
+            ]);
+            break;
+
         case 'RB':
-            return [
+            attrs = attrs.concat([
                 'Speed',
                 'Agility',
                 'Carrying',
@@ -113,9 +117,11 @@ export const GetScoutableAttributes = (pos, arch) => {
                 'Football IQ',
                 'Catching',
                 'Potential Grade'
-            ];
+            ]);
+            break;
+
         case 'FB':
-            return [
+            attrs = attrs.concat([
                 'Speed',
                 'Agility',
                 'Carrying',
@@ -123,9 +129,11 @@ export const GetScoutableAttributes = (pos, arch) => {
                 'Pass Block',
                 'Run Block',
                 'Potential Grade'
-            ];
+            ]);
+            break;
+
         case 'TE':
-            return [
+            attrs = attrs.concat([
                 'Speed',
                 'Agility',
                 'Carrying',
@@ -135,30 +143,36 @@ export const GetScoutableAttributes = (pos, arch) => {
                 'Pass Block',
                 'Run Block',
                 'Potential Grade'
-            ];
+            ]);
+            break;
+
         case 'WR':
-            return [
+            attrs = attrs.concat([
                 'Speed',
                 'Agility',
                 'Carrying',
                 'Catching',
                 'Route Running',
                 'Potential Grade'
-            ];
+            ]);
+            break;
+
         case 'OG':
         case 'OT':
         case 'C':
-            return [
+            attrs = attrs.concat([
                 'Agility',
                 'Strength',
                 'Pass Block',
                 'Run Block',
                 'Football IQ',
                 'Potential Grade'
-            ];
+            ]);
+            break;
+
         case 'DT':
         case 'DE':
-            return [
+            attrs = attrs.concat([
                 'Speed',
                 'Agility',
                 'Tackle',
@@ -167,10 +181,12 @@ export const GetScoutableAttributes = (pos, arch) => {
                 'Run Defense',
                 'Football IQ',
                 'Potential Grade'
-            ];
+            ]);
+            break;
+
         case 'OLB':
         case 'ILB':
-            return [
+            attrs = attrs.concat([
                 'Speed',
                 'Agility',
                 'Tackle',
@@ -180,11 +196,13 @@ export const GetScoutableAttributes = (pos, arch) => {
                 'Zone Coverage',
                 'Football IQ',
                 'Potential Grade'
-            ];
+            ]);
+            break;
+
         case 'CB':
         case 'FS':
         case 'SS':
-            return [
+            attrs = attrs.concat([
                 'Speed',
                 'Agility',
                 'Tackle',
@@ -194,20 +212,24 @@ export const GetScoutableAttributes = (pos, arch) => {
                 'Catching',
                 'Football IQ',
                 'Potential Grade'
-            ];
+            ]);
+            break;
+
         case 'P':
         case 'K':
-            return [
+            attrs = attrs.concat([
                 'Punt Power',
                 'Punt Accuracy',
                 'Kick Power',
                 'Kick Accuracy',
                 'Football IQ',
                 'Potential Grade'
-            ];
+            ]);
+            break;
+
         case 'ATH':
             if (arch === 'Field General') {
-                return [
+                attrs = attrs.concat([
                     'Football IQ',
                     'Throw Power',
                     'Throw Accuracy',
@@ -216,9 +238,9 @@ export const GetScoutableAttributes = (pos, arch) => {
                     'Man Coverage',
                     'Zone Coverage',
                     'Potential Grade'
-                ];
+                ]);
             } else if (arch === 'Triple-Threat') {
-                return [
+                attrs = attrs.concat([
                     'Football IQ',
                     'Throw Power',
                     'Throw Accuracy',
@@ -228,9 +250,9 @@ export const GetScoutableAttributes = (pos, arch) => {
                     'Catching',
                     'Route Running',
                     'Potential Grade'
-                ];
+                ]);
             } else if (arch === 'Wingback') {
-                return [
+                attrs = attrs.concat([
                     'Football IQ',
                     'Speed',
                     'Agility',
@@ -240,9 +262,9 @@ export const GetScoutableAttributes = (pos, arch) => {
                     'Man Coverage',
                     'Zone Coverage',
                     'Potential Grade'
-                ];
+                ]);
             } else if (arch === 'Slotback') {
-                return [
+                attrs = attrs.concat([
                     'Football IQ',
                     'Strength',
                     'Agility',
@@ -252,9 +274,9 @@ export const GetScoutableAttributes = (pos, arch) => {
                     'Pass Block',
                     'Run Block',
                     'Potential Grade'
-                ];
+                ]);
             } else if (arch === 'Lineman') {
-                return [
+                attrs = attrs.concat([
                     'Football IQ',
                     'Strength',
                     'Agility',
@@ -264,13 +286,13 @@ export const GetScoutableAttributes = (pos, arch) => {
                     'Pass Rush',
                     'Run Defense',
                     'Potential Grade'
-                ];
+                ]);
             } else if (
                 arch === 'Strongside' ||
                 arch === 'Weakside' ||
                 arch === 'Bandit'
             ) {
-                return [
+                attrs = attrs.concat([
                     'Football IQ',
                     'Speed',
                     'Agility',
@@ -280,9 +302,9 @@ export const GetScoutableAttributes = (pos, arch) => {
                     'Man Coverage',
                     'Zone Coverage',
                     'Potential Grade'
-                ];
+                ]);
             } else if (arch === 'Return Specialist') {
-                return [
+                attrs = attrs.concat([
                     'Football IQ',
                     'Speed',
                     'Agility',
@@ -291,9 +313,9 @@ export const GetScoutableAttributes = (pos, arch) => {
                     'Route Running',
                     'Tackle',
                     'Potential Grade'
-                ];
+                ]);
             } else if (arch === 'Soccer Player') {
-                return [
+                attrs = attrs.concat([
                     'Football IQ',
                     'Speed',
                     'Agility',
@@ -303,11 +325,67 @@ export const GetScoutableAttributes = (pos, arch) => {
                     'Kick Power',
                     'Kick Accuracy',
                     'Potential Grade'
-                ];
+                ]);
             }
-            return [];
+            break;
 
         default:
-            return [];
+            break;
     }
+
+    switch (posTwo) {
+        case 'QB':
+            attrs = attrs.concat(['Throw Power', 'Throw Accuracy']);
+            break;
+
+        case 'RB':
+            attrs = attrs.concat(['Speed', 'Carrying']);
+            break;
+
+        case 'FB':
+            attrs = attrs.concat(['Carrying', 'Strength']);
+            break;
+
+        case 'TE':
+            attrs = attrs.concat(['Catching', 'Strength']);
+            break;
+
+        case 'WR':
+            attrs = attrs.concat(['Catching', 'Route Running']);
+            break;
+
+        case 'OG':
+        case 'OT':
+        case 'C':
+            attrs = attrs.concat(['Pass Block', 'Run Block']);
+            break;
+
+        case 'DT':
+        case 'DE':
+            attrs = attrs.concat(['Pass Rush', 'Run Defense']);
+            break;
+
+        case 'OLB':
+        case 'ILB':
+            attrs = attrs.concat(['Pass Rush', 'Run Defense']);
+            break;
+
+        case 'CB':
+        case 'FS':
+        case 'SS':
+            attrs = attrs.concat(['Man Coverage', 'Zone Coverage']);
+            break;
+
+        case 'P':
+            attrs = attrs.concat(['Punt Power', 'Punt Accuracy']);
+            break;
+        case 'K':
+            attrs = attrs.concat(['Kick Power', 'Kick Accuracy']);
+            break;
+
+        default:
+            break;
+    }
+
+    return attrs;
 };
