@@ -1915,7 +1915,17 @@ const CFBGameplan = ({ currentUser, cfbTeam, nflTeam, isNFL }) => {
                                                                 const name =
                                                                     'Pass' + x;
                                                                 let label = x;
-                                                                if (idx === 5) {
+                                                                if (idx === 0) {
+                                                                    label =
+                                                                        'Short';
+                                                                } else if (
+                                                                    idx === 1
+                                                                ) {
+                                                                    label =
+                                                                        'Medium';
+                                                                } else if (
+                                                                    idx === 5
+                                                                ) {
                                                                     label =
                                                                         'Play Action Medium';
                                                                 } else if (
