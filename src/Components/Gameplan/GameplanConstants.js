@@ -1276,10 +1276,12 @@ export const FocusPlayList = [
     'Triple Option',
     'RPO Choice',
     'RPO Peek',
-    'Quick Pass',
     'Short Pass',
+    'Medium Pass',
     'Long Pass',
+    'Deep Pass',
     'Screen Pass',
     'Play Action Short',
-    'Play Action Long'
+    'Play Action Long',
+    'Play Action Deep'
 ];
