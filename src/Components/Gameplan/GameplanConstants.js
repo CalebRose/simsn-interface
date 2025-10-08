@@ -1240,7 +1240,7 @@ export const TargetingLabels = [
     'FB1'
 ];
 
-export const TargetDepthLabel = ['Quick', 'Short', 'Long', 'None'];
+export const TargetDepthLabel = ['Short', 'Medium', 'Long', 'Deep', 'None'];
 export const WRRunnerList = ['WR1', 'WR2', 'WR3', 'WR4', 'WR5'];
 
 export const DefensiveSchemeOptions = [
