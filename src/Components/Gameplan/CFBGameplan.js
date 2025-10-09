@@ -822,7 +822,7 @@ const CFBGameplan = ({ currentUser, cfbTeam, nflTeam, isNFL }) => {
             gp.PassLong +
             gp.PassDeep +
             gp.PassScreen +
-            gp.PassPAShort +
+            gp.PassPAMedium +
             gp.PassPALong +
             gp.PassPADeep;
 
