@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import toast from 'react-hot-toast';
@@ -24,7 +24,6 @@ const CFBHomepage = ({ currentUser, cfbTeam, cfb_Timestamp }) => {
     const [logo, setLogo] = useState('');
     const [teamData, setTeamData] = useState(null);
     const [teamColors, setTeamColors] = useState('');
-    const [viewableMatches, setViewableMatches] = useState(null);
     const [games, setGames] = useState([]);
     const [standings, setStandings] = useState([]);
     const [newsFeed, setNewsFeed] = useState([]);
@@ -91,8 +90,10 @@ const CFBHomepage = ({ currentUser, cfbTeam, cfb_Timestamp }) => {
         }
     }, [currentUser, cfbTeam, cfb_Timestamp]);
 
-    useEffect(() => {
-        if (!cfb_Timestamp?.CollegeWeek || !games.length) return;
+    const viewableMatches = useMemo(() => {
+        if (!games) return [];
+        if (!cfb_Timestamp?.CollegeWeek || !games.length) return [];
+
         let currentWeek = cfb_Timestamp.CollegeWeek;
         let prevWeek = isMobile ? currentWeek - 1 : currentWeek - 2;
         let nextWeek = isMobile ? currentWeek + 1 : currentWeek + 2;
@@ -101,15 +102,14 @@ const CFBHomepage = ({ currentUser, cfbTeam, cfb_Timestamp }) => {
         let nextIdx = games.findIndex((x) => x.Week === nextWeek);
 
         if (prevIdx === -1 && nextIdx === -1) {
-            setViewableMatches([]);
-            return;
+            return [];
         }
         if (prevIdx === -1 && nextIdx > -1) {
             prevIdx = 0;
         } else if (prevIdx > -1 && nextIdx === -1) {
             nextIdx = games.findIndex((x) => x.Week === currentWeek);
         }
-        setViewableMatches(games.slice(prevIdx, nextIdx + 1));
+        return games.slice(prevIdx, nextIdx + 1);
     }, [cfb_Timestamp, games, isMobile]);
 
     useEffect(() => {
