@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import toast from 'react-hot-toast';
 import Select from 'react-select';
 import BBAMatchService from '../../../_Services/simNBA/BBAMatchService';
 import BBATeamService from '../../../_Services/simNBA/BBATeamService';
@@ -20,7 +19,6 @@ const CBBSchedulePage = ({ currentUser, cbbTeam, nbaTeam, cbb_Timestamp }) => {
     const [allCBBMatches, setAllCBBMatches] = useState([]);
     const [allNBAMatches, setAllNBAMatches] = useState([]);
     const [allISLMatches, setAllISLMatches] = useState([]);
-    const [viewableMatches, setViewableMatches] = useState([]);
     const [viewMatches, setViewMatches] = useState([]);
     const [weekOptions, setWeekOptions] = useState(null);
     const [teamOptions, setTeamOptions] = useState(null);
@@ -173,6 +171,7 @@ const CBBSchedulePage = ({ currentUser, cbbTeam, nbaTeam, cbb_Timestamp }) => {
         const season = seasonID + 2020;
         const diffSeason = season - 2000;
         week = diffSeason * 100 + week;
+        nbaWeekID = week;
 
         await _matchService.ExportResults(
             seasonID,

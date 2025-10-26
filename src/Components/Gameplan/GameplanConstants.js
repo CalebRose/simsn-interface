@@ -1222,7 +1222,7 @@ export const PassPlayLabels = [
     'Long',
     'Deep',
     'Screen',
-    'PAShort',
+    'PAMedium',
     'PALong',
     'PADeep'
 ];
