@@ -817,14 +817,16 @@ const CFBGameplan = ({ currentUser, cfbTeam, nflTeam, isNFL }) => {
         }
 
         currentDistribution =
-            gp.PassQuick +
             gp.PassShort +
+            gp.PassMedium +
             gp.PassLong +
             gp.PassDeep +
             gp.PassScreen +
             gp.PassPAMedium +
             gp.PassPALong +
             gp.PassPADeep;
+
+        console.log({ currentDistribution, gp });
 
         const validPass = ValidatePlayDistribution(
             currentDistribution,
@@ -1921,11 +1923,27 @@ const CFBGameplan = ({ currentUser, cfbTeam, nflTeam, isNFL }) => {
                                                                 } else if (
                                                                     idx === 1
                                                                 ) {
+                                                                    console.log(
+                                                                        {
+                                                                            x,
+                                                                            name,
+                                                                            label,
+                                                                            idx
+                                                                        }
+                                                                    );
                                                                     label =
                                                                         'Medium';
                                                                 } else if (
                                                                     idx === 5
                                                                 ) {
+                                                                    console.log(
+                                                                        {
+                                                                            x,
+                                                                            name,
+                                                                            label,
+                                                                            idx
+                                                                        }
+                                                                    );
                                                                     label =
                                                                         'Play Action Medium';
                                                                 } else if (

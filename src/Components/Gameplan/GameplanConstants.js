@@ -1217,8 +1217,8 @@ export const RPOLabels = [
 ];
 
 export const PassPlayLabels = [
-    'Quick',
     'Short',
+    'Medium',
     'Long',
     'Deep',
     'Screen',

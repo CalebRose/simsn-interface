@@ -88,14 +88,17 @@ export const ValidatePassPlayDistribution = (gp) => {
         case 'Vertical':
         case 'West Coast':
         case 'Run and Shoot':
-            if (gp.PassQuick > 50) {
+            if (gp.PassShort > 50) {
                 return false;
             }
 
-            if (gp.PassShort + gp.PassPAShort > 50) {
+            if (gp.PassMedium + gp.PassPAMedium > 50) {
                 return false;
             }
             if (gp.PassLong + gp.PassPALong > 50) {
+                return false;
+            }
+            if (gp.PassDeep + gp.PassPADeep > 15) {
                 return false;
             }
 
@@ -106,14 +109,17 @@ export const ValidatePassPlayDistribution = (gp) => {
         case 'Pro':
         case 'Power Run':
         case 'I Option':
-            if (gp.PassQuick > 45) {
-                return false;
-            }
-
             if (gp.PassShort > 45) {
                 return false;
             }
+
+            if (gp.PassMedium > 45) {
+                return false;
+            }
             if (gp.PassLong > 45) {
+                return false;
+            }
+            if (gp.PassDeep + gp.PassPADeep > 10) {
                 return false;
             }
 
@@ -133,15 +139,19 @@ export const ValidatePassPlayDistribution = (gp) => {
         case 'Wing-T':
         case 'Flexbone':
         case 'Wishbone':
-            if (gp.PassQuick > 50) {
-                return false;
-            }
-
             if (gp.PassShort > 50) {
                 return false;
             }
 
+            if (gp.PassMedium > 50) {
+                return false;
+            }
+
             if (gp.PassLong > 50) {
+                return false;
+            }
+
+            if (gp.PassDeep + gp.PassPADeep > 10) {
                 return false;
             }
 
@@ -159,14 +169,17 @@ export const ValidatePassPlayDistribution = (gp) => {
             break;
         case 'Spread Option':
         case 'Pistol':
-            if (gp.PassQuick > 50) {
-                return false;
-            }
-
             if (gp.PassShort > 50) {
                 return false;
             }
+
+            if (gp.PassMedium > 50) {
+                return false;
+            }
             if (gp.PassLong > 50) {
+                return false;
+            }
+            if (gp.PassDeep + gp.PassPADeep > 10) {
                 return false;
             }
 
