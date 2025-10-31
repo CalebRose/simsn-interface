@@ -346,7 +346,6 @@ const CFBDepthChart = ({ currentUser, cfbTeam, viewMode, isNFL }) => {
         const dc = [...currentDepthChart];
         let DepthChartMap = {};
         // It is not possible to have duplicate records under the same position
-        console.log({ rosterMap });
         for (let i = 0; i < dc.length; i++) {
             let row = dc[i];
             const pos = row.Position;

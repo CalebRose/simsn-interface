@@ -95,7 +95,6 @@ const Roster = ({ currentUser, cfbTeam, cfb_Timestamp, viewMode }) => {
     const getRoster = async (ID) => {
         if (ID !== null || ID > 0) {
             const res = await rosterService.GetCFBRosterDataByTeamID(ID);
-            console.log({ res });
             const { Players, Promises } = res;
             setRoster(() => [...Players]);
             setViewRoster(() => [...Players]);

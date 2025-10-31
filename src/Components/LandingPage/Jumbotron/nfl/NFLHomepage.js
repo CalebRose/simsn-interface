@@ -150,8 +150,6 @@ const NFLHomepage = ({ currentUser, nflTeam, cfb_Timestamp }) => {
             cfb_Timestamp.NFLSeasonID
         );
 
-        console.log({ res });
-
         setGames(() => res);
     };
 
