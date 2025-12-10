@@ -1282,6 +1282,7 @@ export const FocusPlayList = [
     'Deep Pass',
     'Screen Pass',
     'Play Action Short',
+    'Play Action Medium',
     'Play Action Long',
     'Play Action Deep'
 ];
