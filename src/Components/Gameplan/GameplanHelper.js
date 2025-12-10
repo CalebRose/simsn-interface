@@ -88,112 +88,47 @@ export const ValidatePassPlayDistribution = (gp) => {
         case 'Vertical':
         case 'West Coast':
         case 'Run and Shoot':
-            if (gp.PassShort > 50) {
-                return false;
-            }
-
-            if (gp.PassMedium + gp.PassPAMedium > 50) {
-                return false;
-            }
-            if (gp.PassLong + gp.PassPALong > 50) {
-                return false;
-            }
-            if (gp.PassDeep + gp.PassPADeep > 15) {
-                return false;
-            }
-
-            if (gp.PassScreen > 20) {
-                return false;
-            }
+            if (gp.PassShort > 50) return false;
+            if (gp.PassMedium + gp.PassPAMedium > 50) return false;
+            if (gp.PassLong + gp.PassPALong > 50) return false;
+            if (gp.PassDeep + gp.PassPADeep > 15) return false;
+            if (gp.PassScreen > 20) return false;
             break;
         case 'Pro':
         case 'Power Run':
         case 'I Option':
-            if (gp.PassShort > 45) {
-                return false;
-            }
-
-            if (gp.PassMedium > 45) {
-                return false;
-            }
-            if (gp.PassLong > 45) {
-                return false;
-            }
-            if (gp.PassDeep + gp.PassPADeep > 10) {
-                return false;
-            }
-
-            if (gp.PassScreen > 20) {
-                return false;
-            }
-
-            if (gp.PassPAShort > 20) {
-                return false;
-            }
-
-            if (gp.PassPALong > 20) {
-                return false;
-            }
+            if (gp.PassShort > 45) return false;
+            if (gp.PassMedium > 45) return false;
+            if (gp.PassLong > 45) return false;
+            if (gp.PassDeep + gp.PassPADeep > 10) return false;
+            if (gp.PassScreen > 20) return false;
+            if (gp.PassPAShort > 20) return false;
+            if (gp.PassPAMedium > 20) return false;
+            if (gp.PassPALong > 20) return false;
             break;
         case 'Double Wing Option':
         case 'Wing-T':
         case 'Flexbone':
         case 'Wishbone':
-            if (gp.PassShort > 50) {
-                return false;
-            }
-
-            if (gp.PassMedium > 50) {
-                return false;
-            }
-
-            if (gp.PassLong > 50) {
-                return false;
-            }
-
-            if (gp.PassDeep + gp.PassPADeep > 10) {
-                return false;
-            }
-
-            if (gp.PassScreen > 20) {
-                return false;
-            }
-
-            if (gp.PassPAShort > 30) {
-                return false;
-            }
-
-            if (gp.PassPALong > 30) {
-                return false;
-            }
+            if (gp.PassShort > 50) return false;
+            if (gp.PassMedium > 50) return false;
+            if (gp.PassLong > 50) return false;
+            if (gp.PassDeep + gp.PassPADeep > 10) return false;
+            if (gp.PassScreen > 20) return false;
+            if (gp.PassPAShort > 30) return false;
+            if (gp.PassPAMedium > 30) return false;
+            if (gp.PassPALong > 30) return false;
             break;
         case 'Spread Option':
         case 'Pistol':
-            if (gp.PassShort > 50) {
-                return false;
-            }
-
-            if (gp.PassMedium > 50) {
-                return false;
-            }
-            if (gp.PassLong > 50) {
-                return false;
-            }
-            if (gp.PassDeep + gp.PassPADeep > 10) {
-                return false;
-            }
-
-            if (gp.PassScreen > 20) {
-                return false;
-            }
-
-            if (gp.PassPAShort > 25) {
-                return false;
-            }
-
-            if (gp.PassPALong > 25) {
-                return false;
-            }
+            if (gp.PassShort > 50) return false;
+            if (gp.PassMedium > 50) return false;
+            if (gp.PassLong > 50) return false;
+            if (gp.PassDeep + gp.PassPADeep > 10) return false;
+            if (gp.PassScreen > 20) return false;
+            if (gp.PassPAShort > 25) return false;
+            if (gp.PassPAMedium > 25) return false;
+            if (gp.PassPALong > 25) return false;
             break;
         default:
             break;
