@@ -395,6 +395,26 @@ const TransferPortal = ({
         setTimeout(() => loadRecords(), 500);
     };
 
+    if (!isCFB) {
+        return (
+            <>
+                <div className="container-fluid mt-3">
+                    <h2>
+                        Please navigate to interface 2.0 to use the transfer
+                        portal.
+                    </h2>
+                    <a
+                        href="https://calebrose.io/simsn-interface-v2/"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        Link to SimSN Interface 2.0
+                    </a>
+                </div>
+            </>
+        );
+    }
+
     return (
         <>
             <div className="container-fluid mt-3">
