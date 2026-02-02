@@ -733,6 +733,19 @@ export const ExtendNBAPlayerModal = ({
             isRule5Valid &&
             validToExistingOffer;
 
+        console.log({
+            isValid,
+            meetRequirement,
+            isRule1Valid,
+            isRule2Valid,
+            isRule3Valid,
+            isRule4Valid,
+            isRule5Valid,
+            validToExistingOffer,
+            hasExistingOffer,
+            existingOffer
+        });
+
         setRule1(() => isRule1Valid);
         setRule2(() => isRule2Valid);
         setRule3(() => isRule3Valid);
@@ -773,7 +786,7 @@ export const ExtendNBAPlayerModal = ({
 
     const OfferButton = () => {
         if (validOffer) {
-            if (!hasExistingOffer && player.IsAcceptingOffers) {
+            if (!hasExistingOffer) {
                 return (
                     <button
                         type="button"
@@ -784,10 +797,7 @@ export const ExtendNBAPlayerModal = ({
                         Yes
                     </button>
                 );
-            } else if (
-                hasExistingOffer &&
-                (player.IsAcceptingOffers || player.IsNegotiating)
-            ) {
+            } else if (hasExistingOffer) {
                 return (
                     <button
                         type="button"
