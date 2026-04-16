@@ -41,6 +41,25 @@ const TransferPortal = ({
     cbb_Timestamp,
     viewMode
 }) => {
+    return (
+        <>
+            <div className="container-fluid mt-3">
+                <h3>
+                    Interface 1.0's Transfer Portal is officially closed. Please
+                    navigate to Interface 2.0 in order to use the transfer
+                    portal.
+                </h3>
+                <a
+                    href="https://calebrose.io/simsn-interface-v2/"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    Link to SimSN Interface 2.0
+                </a>
+            </div>
+        </>
+    );
+
     const _portalService = new PortalService();
     const [isLoading, setIsLoading] = useState(true);
     const [teamProfile, setTeamProfile] = useState(null);
