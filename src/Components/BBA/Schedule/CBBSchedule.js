@@ -11,24 +11,6 @@ import { SubmitCollegePollForm } from '../../_Common/SubmitCollegePollModal';
 import { CollegePollModal } from '../../_Common/CollegePollModal';
 
 const CBBSchedulePage = ({ currentUser, cbbTeam, nbaTeam, cbb_Timestamp }) => {
-    return (
-        <>
-            <div className="container-fluid mt-3">
-                <h3>
-                    Interface 1.0's Gameplan Page is officially closed. Please
-                    navigate to Interface 2.0 in order to use the CBB/NBA
-                    Schedule page.
-                </h3>
-                <a
-                    href="https://calebrose.io/simsn-interface-v2/"
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    Link to SimSN Interface 2.0
-                </a>
-            </div>
-        </>
-    );
     // Services
     let _matchService = new BBAMatchService();
     let _teamService = new BBATeamService();
@@ -534,18 +516,6 @@ const CBBSchedulePage = ({ currentUser, cbbTeam, nbaTeam, cbb_Timestamp }) => {
                                 College Poll
                             </button>
                         </div>
-                        {cbb_Timestamp.GamesARan && (
-                            <div className="row mt-2 mb-2 justify-content-center px-2">
-                                <button
-                                    type="button"
-                                    className="btn btn-primary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#submitPollModal"
-                                >
-                                    Submit College Poll
-                                </button>
-                            </div>
-                        )}
                     </div>
                     <CBBGameModal
                         game={viewGame}
