@@ -36,6 +36,24 @@ import {
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const NBADraftPage = ({ currentUser, cbb_Timestamp, viewMode }) => {
+    return (
+        <>
+            <div className="container-fluid mt-3">
+                <h3>
+                    Interface 1.0's Gameplan Page is officially closed. Please
+                    navigate to Interface 2.0 in order to use the NBA Draft
+                    page.
+                </h3>
+                <a
+                    href="https://calebrose.io/simsn-interface-v2/"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    Link to SimSN Interface 2.0
+                </a>
+            </div>
+        </>
+    );
     // Services
     const _draftService = new BBADraftService();
     // Admin Values
@@ -348,8 +366,8 @@ const NBADraftPage = ({ currentUser, cbb_Timestamp, viewMode }) => {
         let draftingTeam = '';
         let draftTeamID = 0;
         if (nextDraftPick) {
-            (draftingTeam = nextDraftPick.Team),
-                (draftTeamID = nextDraftPick.TeamID);
+            ((draftingTeam = nextDraftPick.Team),
+                (draftTeamID = nextDraftPick.TeamID));
         }
 
         const newData = {

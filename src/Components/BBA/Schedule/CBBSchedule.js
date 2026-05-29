@@ -11,6 +11,24 @@ import { SubmitCollegePollForm } from '../../_Common/SubmitCollegePollModal';
 import { CollegePollModal } from '../../_Common/CollegePollModal';
 
 const CBBSchedulePage = ({ currentUser, cbbTeam, nbaTeam, cbb_Timestamp }) => {
+    return (
+        <>
+            <div className="container-fluid mt-3">
+                <h3>
+                    Interface 1.0's Gameplan Page is officially closed. Please
+                    navigate to Interface 2.0 in order to use the CBB/NBA
+                    Schedule page.
+                </h3>
+                <a
+                    href="https://calebrose.io/simsn-interface-v2/"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    Link to SimSN Interface 2.0
+                </a>
+            </div>
+        </>
+    );
     // Services
     let _matchService = new BBAMatchService();
     let _teamService = new BBATeamService();

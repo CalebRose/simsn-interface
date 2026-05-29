@@ -17,6 +17,24 @@ import { NBAFreeAgencyRow } from './NBAFreeAgencyRow';
 import { Spinner } from '../../../_Common/Spinner';
 
 const NBAFreeAgency = ({ currentUser, nbaTeam, cbb_Timestamp, viewMode }) => {
+    return (
+        <>
+            <div className="container-fluid mt-3">
+                <h3>
+                    Interface 1.0's Gameplan Page is officially closed. Please
+                    navigate to Interface 2.0 in order to use the NBA Free
+                    Agency page.
+                </h3>
+                <a
+                    href="https://calebrose.io/simsn-interface-v2/"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    Link to SimSN Interface 2.0
+                </a>
+            </div>
+        </>
+    );
     const _playerService = new BBAPlayerService();
     const positions = MapObjOptions(BBPositionList);
     const letterGrades = MapOptions(LetterGradesList);

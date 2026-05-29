@@ -22,6 +22,24 @@ import { useMediaQuery } from 'react-responsive';
 import { MobileBBAGPRow } from '../../../_Common/BBAMobileGPRow';
 
 const NBAGameplan = ({ currentUser, viewMode }) => {
+    return (
+        <>
+            <div className="container-fluid mt-3">
+                <h3>
+                    Interface 1.0's Gameplan Page is officially closed. Please
+                    navigate to Interface 2.0 in order to use the NBA Gameplan
+                    page.
+                </h3>
+                <a
+                    href="https://calebrose.io/simsn-interface-v2/"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    Link to SimSN Interface 2.0
+                </a>
+            </div>
+        </>
+    );
     let playerService = new BBAPlayerService();
     let gameplanService = new BBAGameplanService();
     const [team, setTeam] = useState('');

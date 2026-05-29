@@ -128,7 +128,7 @@ const CFBHomepage = ({ currentUser, cfbTeam, cfb_Timestamp }) => {
                 <div className="col-auto justify-content-start">
                     <h2>
                         <img
-                            className="landing-image"
+                            className="landing-image me-2"
                             src={logo}
                             alt="Go Cougs"
                         />

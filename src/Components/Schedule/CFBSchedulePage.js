@@ -120,9 +120,8 @@ const SchedulePage = ({ cfbTeam, cfb_Timestamp, viewMode, currentUser }) => {
     };
 
     const GetAllGames = async (seasonID) => {
-        const response = await _scheduleService.GetAllCollegeGamesInASeason(
-            seasonID
-        );
+        const response =
+            await _scheduleService.GetAllCollegeGamesInASeason(seasonID);
 
         setAllGames(() => [...response]);
     };
@@ -330,8 +329,6 @@ const SchedulePage = ({ cfbTeam, cfb_Timestamp, viewMode, currentUser }) => {
                                 <button
                                     type="button"
                                     className="btn btn-primary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#submitPollModal"
                                 >
                                     Submit College Poll
                                 </button>

@@ -160,9 +160,8 @@ const CFBDepthChart = ({ currentUser, cfbTeam, viewMode, isNFL }) => {
             UpdatedPlayerPositions: dc
         };
 
-        const save = await depthChartService.SaveDepthChart(
-            UpdateDepthChartDTO
-        );
+        const save =
+            await depthChartService.SaveDepthChart(UpdateDepthChartDTO);
 
         if (save.ok) {
             toast.success('Successfully Saved Gameplan!', {
@@ -520,7 +519,7 @@ const CFBDepthChart = ({ currentUser, cfbTeam, viewMode, isNFL }) => {
                     <button
                         className="btn btn-primary"
                         onClick={SaveToast}
-                        disabled={!(isValid && canModify)}
+                        disabled
                     >
                         Save Depth Chart
                     </button>

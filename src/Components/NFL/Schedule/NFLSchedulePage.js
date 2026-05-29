@@ -92,9 +92,8 @@ const NFLSchedulePage = ({ nflTeam, cfb_Timestamp, viewMode, currentUser }) => {
     };
 
     const GetAllGames = async (seasonID) => {
-        const response = await _scheduleService.GetAllNFLGamesInASeason(
-            seasonID
-        );
+        const response =
+            await _scheduleService.GetAllNFLGamesInASeason(seasonID);
 
         setAllGames(() => [...response]);
     };

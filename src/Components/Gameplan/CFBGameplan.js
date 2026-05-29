@@ -1322,8 +1322,7 @@ const CFBGameplan = ({ currentUser, cfbTeam, nflTeam, isNFL }) => {
                         className={
                             isValid ? `btn btn-primary` : `btn btn-secondary`
                         }
-                        disabled={!isValid}
-                        onClick={SaveToast}
+                        disabled
                     >
                         Save Gameplan
                     </button>

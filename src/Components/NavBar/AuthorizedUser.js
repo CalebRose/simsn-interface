@@ -175,23 +175,6 @@ const AuthorizedUser = ({ user, setCurrentUser, inbox }) => {
         <ul className="navbar-nav justify-content-end">
             {user && user.bba_roleID === 'Admin' ? <BBAdmin /> : ''}
             {user && user.roleID === 'Admin' ? <FBAdmin /> : ''}
-            <InboxModal inbox={inbox} />
-            <li className="nav-item">
-                <div className="nav-link">
-                    <button
-                        type="button"
-                        className="btn btn-sm"
-                        data-bs-toggle="modal"
-                        data-bs-target="#inboxModal"
-                    >
-                        <i
-                            className={`bi bi-envelope-fill ${
-                                unreadNoti ? 'text-danger' : ''
-                            }`}
-                        />
-                    </button>
-                </div>
-            </li>
             <li className="nav-item">
                 <Link className="nav-link" to={routes.USER}>
                     <span className="glyphicon glyphicon-user"></span>
@@ -201,10 +184,10 @@ const AuthorizedUser = ({ user, setCurrentUser, inbox }) => {
             <li className="nav-item">
                 <a
                     className="nav-link"
-                    href="https://www.simfba.com"
+                    href="https://calebrose.io/simsn-interface-v2/"
                     target="_blank"
                 >
-                    SimSN Site
+                    Interface 2.0
                 </a>
             </li>
             <li className="nav-item">

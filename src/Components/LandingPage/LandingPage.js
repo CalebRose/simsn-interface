@@ -169,6 +169,17 @@ const LandingPage = ({ currentUser, nflTeam, cbbTeam, nbaTeam, inbox }) => {
                 {isMobile ? (
                     <div className="row">
                         <div className="btn-group-sm btn-group d-flex">
+                            <button
+                                type="button"
+                                className="btn btn-outline-light btn-sm mb-2 btn-mobile"
+                            >
+                                <a
+                                    href="https://calebrose.io/simsn-interface-v2/"
+                                    target="_blank"
+                                >
+                                    Interface 2.0
+                                </a>
+                            </button>
                             {currentUser && currentUser.teamId && (
                                 <button
                                     type="button"
@@ -230,6 +241,18 @@ const LandingPage = ({ currentUser, nflTeam, cbbTeam, nbaTeam, inbox }) => {
                 ) : (
                     <div className="col-1">
                         <div className="btn-group-sm btn-group-vertical d-flex">
+                            <a
+                                href="https://calebrose.io/simsn-interface-v2/"
+                                target="_blank"
+                            >
+                                <button
+                                    type="button"
+                                    className="btn btn-outline-light btn-sm mb-2 btn-mobile"
+                                >
+                                    Interface 2.0
+                                </button>
+                            </a>
+
                             {currentUser && currentUser.teamId && (
                                 <button
                                     type="button"
